@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <link rel ="icon" href="https://static.vecteezy.com/system/resources/previews/011/421/347/non_2x/yellow-billiard-ball-number-one-png.png" type="image/x-icon>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤙 Buatan CS Ganteng Idaman</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-gradient-1: #667eea;
+            --bg-gradient-2: #764ba2;
+            --panel-bg: white;
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --left-panel-bg-1: #2c3e50;
+            --left-panel-bg-2: #34495e;
+            --output-bg: #f8f9fa;
+            --output-border: #e9ecef;
+            --button-gradient-1: #667eea;
+            --button-gradient-2: #764ba2;
+        }
+
+        body.dark-theme {
+            --bg-gradient-1: #1a1a2e;
+            --bg-gradient-2: #16213e;
+            --panel-bg: #0f3460;
+            --text-primary: #e4e4e4;
+            --text-secondary: #a0a0a0;
+            --left-panel-bg-1: #0a1929;
+            --left-panel-bg-2: #001e3c;
+            --output-bg: #001e3c;
+            --output-border: #1e3a5f;
+            --button-gradient-1: #e94560;
+            --button-gradient-2: #533483;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
+            background-size: 400% 400%;
+            animation: gradientMove 15s ease infinite;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+            transition: all 0.5s ease;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Particles */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: floatParticle linear infinite;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) translateX(0) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            padding: 10px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .theme-icon {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover .theme-icon {
+            transform: rotate(20deg);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+            overflow: visible;
+            display: flex;
+            min-height: 90vh;
+            position: relative;
+            z-index: 10;
+            transition: all 0.5s ease;
+            gap: 30px;
+        }
+
+        /* Left Panel - No background, just buttons */
+        .left-panel {
+            width: 350px;
+            background: transparent;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transition: all 0.5s ease;
+        }
+
+        /* Logo - No container, just floating image */
+        .logo-container {
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            padding: 20px 0;
+            text-align: center;
+            min-height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: none;
+            position: relative;
+            overflow: visible;
+        }
+
+        .logo-placeholder {
+            width: 100%;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .logo-image {
+            max-width: 100%;
+            max-height: auto;
+            object-fit: contain;
+            display: none;
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
+        }
+
+        .logo-image.visible {
+            display: block;
+        }
+
+        /* Buttons */
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .gen-button {
+            background: linear-gradient(145deg, #4a90e2 0%, #357abd 100%);
+            border: none;
+            padding: 20px 24px;
+            border-radius: 15px;
+            color: white;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: visible;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+            
+            /* 3D Effect with dark blue shadow */
+            box-shadow: 
+                0 6px 0 #1e3a5f,
+                0 12px 20px rgba(30, 58, 95, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        /* Top highlight for 3D effect */
+        .gen-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+            border-radius: 15px 15px 0 0;
+            pointer-events: none;
+        }
+
+        .gen-button:active::after {
+            width: 300px;
+            height: 300px;
+            transition: width 0s, height 0s;
+        }
+
+        /* 3D Hover Effect */
+        .gen-button:hover {
+            transform: translateY(-3px) translateZ(10px);
+            box-shadow: 
+                0 9px 0 #1e3a5f,
+                0 15px 25px rgba(30, 58, 95, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        /* 3D Press Effect */
+        .gen-button:active {
+            transform: translateY(4px) translateZ(0);
+            box-shadow: 
+                0 2px 0 #1e3a5f,
+                0 4px 8px rgba(30, 58, 95, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .gen-button span {
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Right Panel - No background */
+        .right-panel {
+            flex: 1;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transition: all 0.5s ease;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            transition: all 0.5s ease;
+            background: transparent;
+            backdrop-filter: none;
+            border: none;
+            border-radius: 0;
+            padding: 20px 0;
+            box-shadow: none;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            color: white;
+            margin-bottom: 15px;
+            transition: all 0.5s ease;
+            font-weight: 800;
+            animation: rainbowGlow 4s ease-in-out infinite;
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.2rem;
+            transition: all 0.5s ease;
+            font-weight: 500;
+            animation: rainbowGlow 4s ease-in-out infinite;
+            animation-delay: 0.5s;
+        }
+
+        /* Rainbow Glow Pulse Animation */
+        @keyframes rainbowGlow {
+            0% {
+                text-shadow: 
+                    0 0 20px rgba(255, 0, 0, 0.8),
+                    0 0 40px rgba(255, 0, 0, 0.6),
+                    0 0 60px rgba(255, 0, 0, 0.4);
+            }
+            16% {
+                text-shadow: 
+                    0 0 20px rgba(255, 165, 0, 0.8),
+                    0 0 40px rgba(255, 165, 0, 0.6),
+                    0 0 60px rgba(255, 165, 0, 0.4);
+            }
+            33% {
+                text-shadow: 
+                    0 0 20px rgba(255, 255, 0, 0.8),
+                    0 0 40px rgba(255, 255, 0, 0.6),
+                    0 0 60px rgba(255, 255, 0, 0.4);
+            }
+            50% {
+                text-shadow: 
+                    0 0 20px rgba(0, 255, 0, 0.8),
+                    0 0 40px rgba(0, 255, 0, 0.6),
+                    0 0 60px rgba(0, 255, 0, 0.4);
+            }
+            66% {
+                text-shadow: 
+                    0 0 20px rgba(0, 191, 255, 0.8),
+                    0 0 40px rgba(0, 191, 255, 0.6),
+                    0 0 60px rgba(0, 191, 255, 0.4);
+            }
+            83% {
+                text-shadow: 
+                    0 0 20px rgba(138, 43, 226, 0.8),
+                    0 0 40px rgba(138, 43, 226, 0.6),
+                    0 0 60px rgba(138, 43, 226, 0.4);
+            }
+            100% {
+                text-shadow: 
+                    0 0 20px rgba(255, 0, 0, 0.8),
+                    0 0 40px rgba(255, 0, 0, 0.6),
+                    0 0 60px rgba(255, 0, 0, 0.4);
+            }
+        }
+
+        /* Output Box */
+        .output-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .output-label {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: color 0.5s ease;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .output-box {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            font-family: 'Courier New', monospace;
+            font-size: 15px;
+            line-height: 1.8;
+            color: white;
+            overflow-y: auto;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        /* Glassmorphism shine effect */
+        .output-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, 
+                transparent 30%,
+                rgba(255, 255, 255, 0.05) 50%,
+                transparent 70%);
+            animation: glassShine 8s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes glassShine {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Fade in animation for output lines */
+        .output-box.animating {
+            opacity: 0;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .output-box::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .output-box::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .output-box::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .output-box::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .output-box.empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+            transition: color 0.5s ease;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #10b981;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .left-panel {
+                width: 100%;
+            }
+
+            .buttons-container {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .gen-button {
+                flex: 1;
+                min-width: 150px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .right-panel {
+                padding: 20px;
+            }
+
+            .gen-button {
+                font-size: 14px;
+                padding: 15px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <span class="theme-icon" id="themeIcon">🌙</span>
+        <span style="color: white; font-weight: 600;" id="themeText">Dark</span>
+    </div>
+
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particlesContainer"></div>
+
+    <div class="container">
+        <!-- Left Panel -->
+        <div class="left-panel">
+            <!-- Logo with Glassmorphism -->
+            <div class="logo-container">
+                <div class="logo-placeholder">
+                    📷 LOGO DISINI
+                </div>
+                <img src="" alt="Logo" class="logo-image" id="logoImage">
+            </div>
+
+            <!-- 8 Generator Buttons -->
+            <div class="buttons-container">
+                <button class="gen-button" onclick="generate(1)">
+                    <span>🔸 TOTO WUHAN</span>
+                </button>
+                <button class="gen-button" onclick="generate(2)">
+                    <span>🔸 HONGKONG SIANG</span>
+                </button>
+                <button class="gen-button" onclick="generate(3)">
+                    <span>🔸 SYDNEY POOLS</span>
+                </button>
+                <button class="gen-button" onclick="generate(4)">
+                    <span>🔸 TAIPING POOLS</span>
+                </button>
+                <button class="gen-button" onclick="generate(5)">
+                    <span>🔸 SINGAPORE POOLS</span>
+                </button>
+                <button class="gen-button" onclick="generate(6)">
+                    <span>🔸 MALAYSIA POOLS</span>
+                </button>
+                <button class="gen-button" onclick="generate(7)">
+                    <span>🔸 ETAWAH POOLS</span>
+                </button>
+                <button class="gen-button" onclick="generate(8)">
+                    <span>🔸 HONGKONG POOLS</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Panel -->
+        <div class="right-panel">
+            <!-- Header -->
+            <div class="header">
+                <h1>Prediksi Togel</h1>
+                <p>Pilih pasaran di sebelah kiri untuk generate prediksi</p>
+            </div>
+
+            <!-- Output Container -->
+            <div class="output-container">
+                <div class="output-label">
+                    <span>📋 Hasil Generate Disini</span>
+                </div>
+                <div class="output-box empty" id="outputBox">
+                    Pilih Pasarannya wak...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // ============================================
+        // KONFIGURASI - EDIT DI SINI
+        // ============================================
+        
+        // Logo Image URL (ganti dengan URL logo lu)
+        const LOGO_URL = 'logo.png'; // Ganti dengan path/URL logo lu
+        
+        // Togel Market Names
+        const marketNames = {
+            1: 'TOTO WUHAN',
+            2: 'HONGKONG SIANG',
+            3: 'SYDNEY POOLS',
+            4: 'TAIPING POOLS',
+            5: 'SINGAPORE POOLS',
+            6: 'MALAYSIA POOLS',
+            7: 'ETAWAH POOLS',
+            8: 'HONGKONG POOLS'
+        };
+        
+        // Shio list
+        const shioList = ['KUDA', 'ULAR', 'NAGA', 'KELINCI', 'HARIMAU', 'KERBAU', 'TIKUS', 'BABI', 'ANJING', 'AYAM', 'MONYET', 'KAMBING'];
+        
+        // Helper functions
+        function getRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        
+        function generateRandomNumbers(count, min = 1, max = 9) {
+            const numbers = [];
+            for (let i = 0; i < count; i++) {
+                numbers.push(getRandomNumber(min, max));
+            }
+            return numbers;
+        }
+        
+        function generatePairs(count) {
+            const pairs = [];
+            for (let i = 0; i < count; i++) {
+                const num1 = getRandomNumber(0, 9);
+                const num2 = getRandomNumber(0, 9);
+                pairs.push(`${num1}${num2}`);
+            }
+            return pairs;
+        }
+        
+        function getCurrentDate() {
+            const now = new Date();
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const year = now.getFullYear();
+            return `${day}-${month}-${year}`;
+        }
+        
+        function getRandomShio() {
+            return shioList[Math.floor(Math.random() * shioList.length)];
+        }
+        
+        // Generator Functions
+        const generators = {
+            1: function() { return generateTogelPrediction('TOTO WUHAN'); },
+            2: function() { return generateTogelPrediction('HONGKONG SIANG'); },
+            3: function() { return generateTogelPrediction('SYDNEY POOLS'); },
+            4: function() { return generateTogelPrediction('TAIPING POOLS'); },
+            5: function() { return generateTogelPrediction('SINGAPORE POOLS'); },
+            6: function() { return generateTogelPrediction('MALAYSIA POOLS'); },
+            7: function() { return generateTogelPrediction('ETAWAH POOLS'); },
+            8: function() { return generateTogelPrediction('HONGKONG POOLS'); }
+        };
+        
+        function generateTogelPrediction(marketName) {
+            const tanggal = getCurrentDate();
+            const angkaMain = generateRandomNumbers(4).join(' ');
+            const bbfs = generateRandomNumbers(5).join(' ');
+            const shio = getRandomShio();
+            const colokAngka = generateRandomNumbers(2).join(' ');
+            
+            // Generate TOP 2D (25 pairs in 5 rows)
+            const top2d = [];
+            for (let i = 0; i < 5; i++) {
+                const row = generatePairs(5);
+                top2d.push(row.join(' '));
+            }
+            
+            // Generate ANGKA PANAS (3 pairs)
+            const angkaPanas = generatePairs(3).join(' ');
+            
+            // Build result string
+            return `Prediksi Togel - ${marketName} -
+TANGGAL  ${tanggal}
+ANGKA MAIN : ${angkaMain}
+BBFS : ${bbfs}
+SHIO : ${shio}
+COLOK ANGKA : ${colokAngka}
+ 
+TOP 2D :
+${top2d[0]} 
+${top2d[1]} 
+${top2d[2]} 
+${top2d[3]} 
+${top2d[4]}
+ 
+ANGKA PANASNYA : ${angkaPanas}`;
+        }
+        
+        // ============================================
+
+        // Create floating particles
+        function createFloatingParticles() {
+            const container = document.getElementById('particlesContainer');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                particle.style.width = (Math.random() * 4 + 2) + 'px';
+                particle.style.height = particle.style.width;
+                container.appendChild(particle);
+            }
+        }
+
+        // Toggle theme
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('themeIcon');
+            const text = document.getElementById('themeText');
+            
+            body.classList.toggle('dark-theme');
+            
+            if (body.classList.contains('dark-theme')) {
+                icon.textContent = '☀️';
+                text.textContent = 'Light';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.textContent = '🌙';
+                text.textContent = 'Dark';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Load theme preference
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+                document.getElementById('themeIcon').textContent = '☀️';
+                document.getElementById('themeText').textContent = 'Light';
+            }
+        }
+
+        // Load theme and initialize
+        window.addEventListener('DOMContentLoaded', function() {
+            // Load theme
+            loadTheme();
+            
+            // Create particles
+            createFloatingParticles();
+            
+            // Load logo
+            const logoImg = document.getElementById('logoImage');
+            const logoPlaceholder = document.querySelector('.logo-placeholder');
+            
+            if (logoImg && LOGO_URL) {
+                logoImg.src = LOGO_URL;
+                logoImg.onload = function() {
+                    logoPlaceholder.style.display = 'none';
+                    logoImg.classList.add('visible');
+                };
+                logoImg.onerror = function() {
+                    console.log('Logo tidak ditemukan, menggunakan placeholder');
+                };
+            }
+        });
+
+        // Generate function with auto-copy
+        function generate(number) {
+            const outputBox = document.getElementById('outputBox');
+            const button = event.target.closest('.gen-button');
+            
+            // Add loading state
+            button.disabled = true;
+            const originalHTML = button.innerHTML;
+            button.innerHTML = '<span>Generating<span class="loading"></span></span>';
+            
+            // Simulate async generation
+            setTimeout(() => {
+                try {
+                    const result = generators[number]();
+                    
+                    // Add fade-in animation
+                    outputBox.classList.add('animating');
+                    outputBox.textContent = result;
+                    outputBox.classList.remove('empty');
+                    
+                    // Remove animation class after animation completes
+                    setTimeout(() => {
+                        outputBox.classList.remove('animating');
+                    }, 500);
+                    
+                    // Auto copy to clipboard
+                    navigator.clipboard.writeText(result).then(() => {
+                        const marketName = button.querySelector('span').textContent.replace('🔸 ', '');
+                        showToast(`✅ ${marketName} - Done wak!`, 'success');
+                    }).catch(err => {
+                        const marketName = button.querySelector('span').textContent.replace('🔸 ', '');
+                        showToast(`⚠️ ${marketName} - Prediksi berhasil, copy manual gagal`, 'warning');
+                    });
+                    
+                } catch (error) {
+                    outputBox.textContent = `Error: ${error.message}`;
+                    showToast('❌ Terjadi kesalahan!', 'error');
+                }
+                
+                // Restore button
+                button.disabled = false;
+                button.innerHTML = originalHTML;
+            }, 800);
+        }
+
+        // Toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.background = type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#f59e0b';
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
