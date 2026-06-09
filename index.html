@@ -1,847 +1,864 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <link rel ="icon" href="https://static.vecteezy.com/system/resources/previews/011/421/347/non_2x/yellow-billiard-ball-number-one-png.png" type="image/x-icon>
+<link rel ="icon" href="https://symbl-cdn.com/i/webp/3d/c59d663d22a91ddd1c2d711348b922.webp>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🤙 Buatan CS Ganteng Idaman</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <style><style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-        :root {
-            --bg-gradient-1: #667eea;
-            --bg-gradient-2: #764ba2;
-            --panel-bg: white;
-            --text-primary: #2c3e50;
-            --text-secondary: #7f8c8d;
-            --left-panel-bg-1: #2c3e50;
-            --left-panel-bg-2: #34495e;
-            --output-bg: #f8f9fa;
-            --output-border: #e9ecef;
-            --button-gradient-1: #667eea;
-            --button-gradient-2: #764ba2;
-        }
+body {
+  font-family: 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  background: #030a0e;
+  color: white;
+  overflow-x: hidden;
+  position: relative;
+}
 
-        body.dark-theme {
-            --bg-gradient-1: #1a1a2e;
-            --bg-gradient-2: #16213e;
-            --panel-bg: #0f3460;
-            --text-primary: #e4e4e4;
-            --text-secondary: #a0a0a0;
-            --left-panel-bg-1: #0a1929;
-            --left-panel-bg-2: #001e3c;
-            --output-bg: #001e3c;
-            --output-border: #1e3a5f;
-            --button-gradient-1: #e94560;
-            --button-gradient-2: #533483;
-        }
+#aurora-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
-            background-size: 400% 400%;
-            animation: gradientMove 15s ease infinite;
-            min-height: 100vh;
-            padding: 20px;
-            position: relative;
-            overflow-x: hidden;
-            transition: all 0.5s ease;
-        }
+#app {
+  position: relative;
+  z-index: 1;
+}
 
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+/* ===================== NAVBAR ===================== */
+.navbar {
+  width: 100%;
+  background: rgba(0, 10, 18, 0.75);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(0, 255, 180, 0.18);
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  height: 62px;
+  gap: 18px;
+  box-shadow: 0 2px 30px rgba(0, 220, 160, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 
-        /* Floating Particles */
-        .particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
+.navbar-logo {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 8px rgba(0,255,180,0.35));
+}
 
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            animation: floatParticle linear infinite;
-        }
+.navbar-divider {
+  width: 1px;
+  height: 30px;
+  background: rgba(0,255,180,0.2);
+  flex-shrink: 0;
+}
 
-        @keyframes floatParticle {
-            0% {
-                transform: translateY(100vh) translateX(0) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) translateX(100px) scale(1);
-                opacity: 0;
-            }
-        }
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
 
-        /* Theme Toggle */
-        .theme-toggle {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50px;
-            padding: 10px 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
+.nav-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: rgba(200,240,230,0.75);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: 0.6px;
+  transition: all 0.18s;
+  white-space: nowrap;
+}
 
-        .theme-toggle:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
+.nav-btn:hover {
+  background: rgba(0,255,180,0.1);
+  color: #7fffd4;
+  border-color: rgba(0,255,180,0.22);
+}
 
-        .theme-icon {
-            font-size: 20px;
-            transition: transform 0.3s ease;
-        }
+.nav-btn.active {
+  background: linear-gradient(135deg, rgba(0,200,130,0.22), rgba(0,120,200,0.22));
+  color: #5fffcc;
+  border-color: rgba(0,255,180,0.38);
+  box-shadow: 0 0 14px rgba(0,255,180,0.15);
+}
 
-        .theme-toggle:hover .theme-icon {
-            transform: rotate(20deg);
-        }
+/* ===================== LOGO SECTION ===================== */
+.logo-section {
+  width: 100%;
+  padding: 28px 0 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: transparent;
-            border-radius: 0;
-            box-shadow: none;
-            overflow: visible;
-            display: flex;
-            min-height: 90vh;
-            position: relative;
-            z-index: 10;
-            transition: all 0.5s ease;
-            gap: 30px;
-        }
+.logo-section img {
+  max-height: 200px;
+  max-width: 70%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(0,255,180,0.28)) drop-shadow(0 4px 18px rgba(0,0,0,0.5));
+}
 
-        /* Left Panel - No background, just buttons */
-        .left-panel {
-            width: 350px;
-            background: transparent;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            transition: all 0.5s ease;
-        }
+/* ===================== PAGES ===================== */
+.page { display: none; }
+.page.active { display: block; }
 
-        /* Logo - No container, just floating image */
-        .logo-container {
-            background: transparent;
-            border: none;
-            border-radius: 0;
-            padding: 20px 0;
-            text-align: center;
-            min-height: auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: none;
-            position: relative;
-            overflow: visible;
-        }
+/* ===================== SLOT GACOR PAGE ===================== */
+.slot-page {
+  padding: 28px 20px 48px;
+}
 
-        .logo-placeholder {
-            width: 100%;
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 14px;
-            font-weight: 600;
-        }
+.slot-page h1 {
+  text-align: center;
+  font-size: 1.55rem;
+  color: #ffd700;
+  text-shadow: 0 0 14px #ffd700aa;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
 
-        .logo-image {
-            max-width: 100%;
-            max-height: auto;
-            object-fit: contain;
-            display: none;
-            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
-        }
+.slot-subtitle {
+  text-align: center;
+  font-size: 0.78rem;
+  color: #a5ffd8;
+  margin-bottom: 22px;
+  opacity: 0.8;
+}
 
-        .logo-image.visible {
-            display: block;
-        }
+.provider-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+  max-width: 560px;
+  margin: 0 auto 22px;
+}
 
-        /* Buttons */
-        .buttons-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            flex: 1;
-        }
+.provider-btn {
+  background: linear-gradient(145deg, rgba(10,30,20,0.85), rgba(0,50,35,0.85));
+  border: 1.5px solid rgba(0,200,130,0.35);
+  color: #c7ffd8;
+  padding: 10px 6px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-align: center;
+  transition: all 0.18s;
+  line-height: 1.35;
+  letter-spacing: 0.3px;
+  backdrop-filter: blur(8px);
+}
 
-        .gen-button {
-            background: linear-gradient(145deg, #4a90e2 0%, #357abd 100%);
-            border: none;
-            padding: 20px 24px;
-            border-radius: 15px;
-            color: white;
-            font-size: 17px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            position: relative;
-            overflow: visible;
-            transform-style: preserve-3d;
-            transform: translateZ(0);
-            
-            /* 3D Effect with dark blue shadow */
-            box-shadow: 
-                0 6px 0 #1e3a5f,
-                0 12px 20px rgba(30, 58, 95, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3),
-                inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-        }
+.provider-btn:hover {
+  background: linear-gradient(145deg, #ffd700, #ff8c00);
+  color: #000;
+  border-color: #ffd700;
+  transform: scale(1.05);
+  box-shadow: 0 0 14px #ffd70099;
+}
 
-        /* Top highlight for 3D effect */
-        .gen-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 50%;
-            background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 100%);
-            border-radius: 15px 15px 0 0;
-            pointer-events: none;
-        }
+.provider-btn.active {
+  background: linear-gradient(145deg, #ffd700, #ff8c00);
+  color: #000;
+  border-color: #ffd700;
+  box-shadow: 0 0 18px #ffd700bb;
+}
 
-        .gen-button:active::after {
-            width: 300px;
-            height: 300px;
-            transition: width 0s, height 0s;
-        }
+.result-box {
+  max-width: 480px;
+  margin: 0 auto;
+  background: rgba(0, 20, 15, 0.75);
+  backdrop-filter: blur(18px);
+  border: 2px solid #ffd700;
+  border-radius: 18px;
+  padding: 22px 20px 18px;
+  text-align: center;
+  display: none;
+  box-shadow: 0 0 28px #ffd70055;
+  animation: fadeIn 0.35s ease;
+}
 
-        /* 3D Hover Effect */
-        .gen-button:hover {
-            transform: translateY(-3px) translateZ(10px);
-            box-shadow: 
-                0 9px 0 #1e3a5f,
-                0 15px 25px rgba(30, 58, 95, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.4),
-                inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-        }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
-        /* 3D Press Effect */
-        .gen-button:active {
-            transform: translateY(4px) translateZ(0);
-            box-shadow: 
-                0 2px 0 #1e3a5f,
-                0 4px 8px rgba(30, 58, 95, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2),
-                inset 0 -1px 0 rgba(0, 0, 0, 0.3);
-        }
+.result-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #ffd700;
+  text-shadow: 0 0 10px #ffd700cc;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
 
-        .gen-button span {
-            position: relative;
-            z-index: 1;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-        }
+.game-item {
+  background: linear-gradient(90deg, rgba(0,40,30,0.9), rgba(0,25,20,0.9));
+  border-left: 4px solid #ffd700;
+  border-radius: 10px;
+  padding: 11px 16px;
+  margin: 8px 0;
+  font-size: 0.88rem;
+  color: #e2e8f0;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
 
-        /* Right Panel - No background */
-        .right-panel {
-            flex: 1;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            transition: all 0.5s ease;
-        }
+.game-item .icon { font-size: 1rem; flex-shrink: 0; }
 
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-            transition: all 0.5s ease;
-            background: transparent;
-            backdrop-filter: none;
-            border: none;
-            border-radius: 0;
-            padding: 20px 0;
-            box-shadow: none;
-        }
+.footer-text {
+  margin-top: 16px;
+  font-size: 0.95rem;
+  color: #ffd700;
+  font-weight: 800;
+  text-shadow: 0 0 10px #ffd700cc;
+  letter-spacing: 0.5px;
+}
 
-        .header h1 {
-            font-size: 2.8rem;
-            color: white;
-            margin-bottom: 15px;
-            transition: all 0.5s ease;
-            font-weight: 800;
-            animation: rainbowGlow 4s ease-in-out infinite;
-        }
+.btn-regen {
+  margin-top: 14px;
+  background: linear-gradient(90deg, #ffd700, #ff8c00);
+  color: #000;
+  border: none;
+  padding: 9px 24px;
+  border-radius: 22px;
+  font-weight: 800;
+  cursor: pointer;
+  font-size: 0.82rem;
+  transition: transform 0.18s, box-shadow 0.18s;
+  box-shadow: 0 4px 14px #ff8c0055;
+  letter-spacing: 0.4px;
+}
 
-        .header p {
-            color: rgba(255, 255, 255, 0.95);
-            font-size: 1.2rem;
-            transition: all 0.5s ease;
-            font-weight: 500;
-            animation: rainbowGlow 4s ease-in-out infinite;
-            animation-delay: 0.5s;
-        }
+.btn-regen:hover { transform: scale(1.06); box-shadow: 0 4px 20px #ffd70088; }
 
-        /* Rainbow Glow Pulse Animation */
-        @keyframes rainbowGlow {
-            0% {
-                text-shadow: 
-                    0 0 20px rgba(255, 0, 0, 0.8),
-                    0 0 40px rgba(255, 0, 0, 0.6),
-                    0 0 60px rgba(255, 0, 0, 0.4);
-            }
-            16% {
-                text-shadow: 
-                    0 0 20px rgba(255, 165, 0, 0.8),
-                    0 0 40px rgba(255, 165, 0, 0.6),
-                    0 0 60px rgba(255, 165, 0, 0.4);
-            }
-            33% {
-                text-shadow: 
-                    0 0 20px rgba(255, 255, 0, 0.8),
-                    0 0 40px rgba(255, 255, 0, 0.6),
-                    0 0 60px rgba(255, 255, 0, 0.4);
-            }
-            50% {
-                text-shadow: 
-                    0 0 20px rgba(0, 255, 0, 0.8),
-                    0 0 40px rgba(0, 255, 0, 0.6),
-                    0 0 60px rgba(0, 255, 0, 0.4);
-            }
-            66% {
-                text-shadow: 
-                    0 0 20px rgba(0, 191, 255, 0.8),
-                    0 0 40px rgba(0, 191, 255, 0.6),
-                    0 0 60px rgba(0, 191, 255, 0.4);
-            }
-            83% {
-                text-shadow: 
-                    0 0 20px rgba(138, 43, 226, 0.8),
-                    0 0 40px rgba(138, 43, 226, 0.6),
-                    0 0 60px rgba(138, 43, 226, 0.4);
-            }
-            100% {
-                text-shadow: 
-                    0 0 20px rgba(255, 0, 0, 0.8),
-                    0 0 40px rgba(255, 0, 0, 0.6),
-                    0 0 60px rgba(255, 0, 0, 0.4);
-            }
-        }
+.divider { width: 60%; height: 1px; background: #ffd70033; margin: 14px auto; }
 
-        /* Output Box */
-        .output-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+/* ===================== TOGEL PAGE ===================== */
+.togel-page {
+  padding: 0;
+  min-height: 80vh;
+}
 
-        .output-label {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: color 0.5s ease;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            margin-bottom: 10px;
-        }
+.particles-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
 
-        .output-box {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 30px;
-            font-family: 'Courier New', monospace;
-            font-size: 15px;
-            line-height: 1.8;
-            color: white;
-            overflow-y: auto;
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            transition: all 0.5s ease;
-            position: relative;
-        }
+.particle {
+  position: absolute;
+  background: rgba(0, 255, 180, 0.4);
+  border-radius: 50%;
+  animation: floatParticle linear infinite;
+}
 
-        /* Glassmorphism shine effect */
-        .output-box::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, 
-                transparent 30%,
-                rgba(255, 255, 255, 0.05) 50%,
-                transparent 70%);
-            animation: glassShine 8s linear infinite;
-            pointer-events: none;
-        }
+@keyframes floatParticle {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100px) translateX(80px) scale(1); opacity: 0; }
+}
 
-        @keyframes glassShine {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+.togel-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  gap: 30px;
+  padding: 28px 24px 48px;
+  min-height: 80vh;
+  position: relative;
+  z-index: 3;
+}
 
-        /* Fade in animation for output lines */
-        .output-box.animating {
-            opacity: 0;
-            animation: fadeInUp 0.5s ease forwards;
-        }
+.t-left-panel {
+  width: 320px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+.t-logo-area {
+  text-align: center;
+  padding: 16px 0;
+}
 
-        .output-box::-webkit-scrollbar {
-            width: 10px;
-        }
+.t-logo-area img {
+  max-width: 100%;
+  max-height: 80px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.4));
+}
 
-        .output-box::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-        }
+.t-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
-        .output-box::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            transition: background 0.3s ease;
-        }
+.gen-button {
+  background: linear-gradient(145deg, rgba(0,80,200,0.7) 0%, rgba(0,50,140,0.7) 100%);
+  border: 1px solid rgba(0,150,255,0.35);
+  padding: 18px 20px;
+  border-radius: 14px;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 5px 0 rgba(0,30,90,0.9),
+    0 10px 20px rgba(0,30,90,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+  text-align: left;
+}
 
-        .output-box::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
+.gen-button::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 100%);
+  border-radius: 14px 14px 0 0;
+  pointer-events: none;
+}
 
-        .output-box.empty {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(255, 255, 255, 0.6);
-            font-style: italic;
-            transition: color 0.5s ease;
-        }
+.gen-button:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 0 rgba(0,30,90,0.9),
+    0 14px 24px rgba(0,30,90,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.25);
+  border-color: rgba(0,200,255,0.5);
+}
 
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-            margin-left: 10px;
-        }
+.gen-button:active {
+  transform: translateY(3px);
+  box-shadow:
+    0 2px 0 rgba(0,30,90,0.9),
+    0 4px 8px rgba(0,30,90,0.3);
+}
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+.gen-button span {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
 
-        /* Toast Notification */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #10b981;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            font-weight: 600;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
+.t-right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
-        .toast.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
+.t-header {
+  text-align: center;
+  padding: 10px 0 6px;
+}
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .container {
-                flex-direction: column;
-            }
+.t-header h1 {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: white;
+  animation: rainbowGlow 4s ease-in-out infinite;
+  margin-bottom: 10px;
+}
 
-            .left-panel {
-                width: 100%;
-            }
+.t-header p {
+  color: rgba(200,255,240,0.85);
+  font-size: 1.1rem;
+  font-weight: 500;
+  animation: rainbowGlow 4s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
 
-            .buttons-container {
-                flex-direction: row;
-                flex-wrap: wrap;
-            }
+@keyframes rainbowGlow {
+  0%   { text-shadow: 0 0 20px rgba(255,0,0,.8), 0 0 40px rgba(255,0,0,.5); }
+  16%  { text-shadow: 0 0 20px rgba(255,165,0,.8), 0 0 40px rgba(255,165,0,.5); }
+  33%  { text-shadow: 0 0 20px rgba(255,255,0,.8), 0 0 40px rgba(255,255,0,.5); }
+  50%  { text-shadow: 0 0 20px rgba(0,255,0,.8), 0 0 40px rgba(0,255,0,.5); }
+  66%  { text-shadow: 0 0 20px rgba(0,191,255,.8), 0 0 40px rgba(0,191,255,.5); }
+  83%  { text-shadow: 0 0 20px rgba(138,43,226,.8), 0 0 40px rgba(138,43,226,.5); }
+  100% { text-shadow: 0 0 20px rgba(255,0,0,.8), 0 0 40px rgba(255,0,0,.5); }
+}
 
-            .gen-button {
-                flex: 1;
-                min-width: 150px;
-            }
-        }
+.output-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: rgba(200,255,240,0.9);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  margin-bottom: 6px;
+}
 
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8rem;
-            }
+.output-box {
+  flex: 1;
+  min-height: 380px;
+  background: rgba(0, 20, 35, 0.5);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(0,200,160,0.2);
+  border-radius: 20px;
+  padding: 28px;
+  font-family: 'Courier New', monospace;
+  font-size: 15px;
+  line-height: 1.85;
+  color: rgba(220,255,245,0.95);
+  overflow-y: auto;
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(0,255,180,0.08);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  position: relative;
+}
 
-            .right-panel {
-                padding: 20px;
-            }
+.output-box::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: linear-gradient(45deg, transparent 30%, rgba(0,255,180,0.03) 50%, transparent 70%);
+  animation: glassShine 10s linear infinite;
+  pointer-events: none;
+}
 
-            .gen-button {
-                font-size: 14px;
-                padding: 15px 20px;
-            }
-        }
-    </style>
+@keyframes glassShine {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.output-box.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(150,220,200,0.5);
+  font-style: italic;
+}
+
+.output-box.animating {
+  animation: fadeInUp 0.45s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.loading {
+  display: inline-block;
+  width: 18px; height: 18px;
+  border: 3px solid rgba(255,255,255,0.25);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 0.9s ease-in-out infinite;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.toast {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  background: #10b981;
+  color: white;
+  padding: 13px 22px;
+  border-radius: 10px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: all 0.3s ease;
+  z-index: 9999;
+  font-size: 0.9rem;
+}
+
+.toast.show { opacity: 1; transform: translateY(0); }
+
+/* Responsive */
+@media (max-width: 860px) {
+  .togel-inner { flex-direction: column; }
+  .t-left-panel { width: 100%; }
+  .t-buttons { flex-direction: row; flex-wrap: wrap; }
+  .gen-button { flex: 1; min-width: 140px; font-size: 14px; padding: 14px 12px; }
+  .provider-grid { grid-template-columns: repeat(2, 1fr); }
+  .t-header h1 { font-size: 1.8rem; }
+}
+
+@media (max-width: 480px) {
+  .navbar { padding: 0 14px; }
+}
+</style>
 </head>
 <body>
-    <!-- Theme Toggle -->
-    <div class="theme-toggle" onclick="toggleTheme()">
-        <span class="theme-icon" id="themeIcon">🌙</span>
-        <span style="color: white; font-weight: 600;" id="themeText">Dark</span>
+
+<canvas id="aurora-canvas"></canvas>
+<div class="particles-container" id="particlesContainer"></div>
+
+<div id="app">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <img src="logoatas.png" alt="Logo" class="navbar-logo" onerror="this.style.display='none'">
+    <div class="navbar-divider"></div>
+    <div class="navbar-nav">
+      <button class="nav-btn active" id="navSlot" onclick="showPage('slot')">🎰 SLOT GACOR</button>
+      <button class="nav-btn" id="navTogel" onclick="showPage('togel')">🎱 PREDIKSI TOGEL</button>
     </div>
+  </nav>
 
-    <!-- Floating Particles -->
-    <div class="particles-container" id="particlesContainer"></div>
 
-    <div class="container">
-        <!-- Left Panel -->
-        <div class="left-panel">
-            <!-- Logo with Glassmorphism -->
-            <div class="logo-container">
-                <div class="logo-placeholder">
-                    📷 LOGO DISINI
-                </div>
-                <img src="" alt="Logo" class="logo-image" id="logoImage">
-            </div>
 
-            <!-- 8 Generator Buttons -->
-            <div class="buttons-container">
-                <button class="gen-button" onclick="generate(1)">
-                    <span>🔸 TOTO WUHAN</span>
-                </button>
-                <button class="gen-button" onclick="generate(2)">
-                    <span>🔸 HONGKONG SIANG</span>
-                </button>
-                <button class="gen-button" onclick="generate(3)">
-                    <span>🔸 SYDNEY POOLS</span>
-                </button>
-                <button class="gen-button" onclick="generate(4)">
-                    <span>🔸 TAIPING POOLS</span>
-                </button>
-                <button class="gen-button" onclick="generate(5)">
-                    <span>🔸 SINGAPORE POOLS</span>
-                </button>
-                <button class="gen-button" onclick="generate(6)">
-                    <span>🔸 MALAYSIA POOLS</span>
-                </button>
-                <button class="gen-button" onclick="generate(7)">
-                    <span>🔸 ETAWAH POOLS</span>
-                </button>
-                <button class="gen-button" onclick="generate(8)">
-                    <span>🔸 HONGKONG POOLS</span>
-                </button>
-            </div>
-        </div>
-
-        <!-- Right Panel -->
-        <div class="right-panel">
-            <!-- Header -->
-            <div class="header">
-                <h1>Prediksi Togel</h1>
-                <p>Pilih pasaran di sebelah kiri untuk generate prediksi</p>
-            </div>
-
-            <!-- Output Container -->
-            <div class="output-container">
-                <div class="output-label">
-                    <span>📋 Hasil Generate Disini</span>
-                </div>
-                <div class="output-box empty" id="outputBox">
-                    Pilih Pasarannya wak...
-                </div>
-            </div>
-        </div>
+  <!-- PAGE: SLOT GACOR -->
+  <div class="page active slot-page" id="page-slot">
+    <div class="provider-grid" id="providerGrid"></div>
+    <div class="result-box" id="resultBox">
+      <div class="result-title" id="resultTitle"></div>
+      <div id="gameList"></div>
+      <div class="divider"></div>
+      <div class="footer-text">🔥KAMI NANTIKAN KABAR JACKPOT NYA BOSKU🔥</div>
+      <button class="btn-regen" id="regenBtn">🔄 Generate Ulang</button>
     </div>
+  </div>
 
-    <!-- Toast Notification -->
-    <div class="toast" id="toast"></div>
+  <!-- PAGE: TOGEL -->
+  <div class="page togel-page" id="page-togel">
+    <div class="togel-inner">
+      <div class="t-left-panel">
+        <div class="t-logo-area">
+        </div>
+        <div class="t-buttons">
+          <button class="gen-button" onclick="generate(1, event)"><span>🔸 TOTO WUHAN</span></button>
+          <button class="gen-button" onclick="generate(2, event)"><span>🔸 HONGKONG SIANG</span></button>
+          <button class="gen-button" onclick="generate(3, event)"><span>🔸 SYDNEY POOLS</span></button>
+          <button class="gen-button" onclick="generate(4, event)"><span>🔸 TAIPING POOLS</span></button>
+          <button class="gen-button" onclick="generate(5, event)"><span>🔸 SINGAPORE POOLS</span></button>
+          <button class="gen-button" onclick="generate(6, event)"><span>🔸 MALAYSIA POOLS</span></button>
+          <button class="gen-button" onclick="generate(7, event)"><span>🔸 ETAWAH POOLS</span></button>
+          <button class="gen-button" onclick="generate(8, event)"><span>🔸 HONGKONG POOLS</span></button>
+        </div>
+      </div>
+      <div class="t-right-panel">
+        <div class="t-header">
+        </div>
+        <div class="output-label">📋 Hasil Generate Disini</div>
+        <div class="output-box empty" id="outputBox">Pilih Pasarannya wak...</div>
+      </div>
+    </div>
+  </div>
 
-    <script>
-        // ============================================
-        // KONFIGURASI - EDIT DI SINI
-        // ============================================
-        
-        // Logo Image URL (ganti dengan URL logo lu)
-        const LOGO_URL = 'logo.png'; // Ganti dengan path/URL logo lu
-        
-        // Togel Market Names
-        const marketNames = {
-            1: 'TOTO WUHAN',
-            2: 'HONGKONG SIANG',
-            3: 'SYDNEY POOLS',
-            4: 'TAIPING POOLS',
-            5: 'SINGAPORE POOLS',
-            6: 'MALAYSIA POOLS',
-            7: 'ETAWAH POOLS',
-            8: 'HONGKONG POOLS'
-        };
-        
-        // Shio list
-        const shioList = ['KUDA', 'ULAR', 'NAGA', 'KELINCI', 'HARIMAU', 'KERBAU', 'TIKUS', 'BABI', 'ANJING', 'AYAM', 'MONYET', 'KAMBING'];
-        
-        // Helper functions
-        function getRandomNumber(min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
-        
-        function generateRandomNumbers(count, min = 1, max = 9) {
-            const numbers = [];
-            for (let i = 0; i < count; i++) {
-                numbers.push(getRandomNumber(min, max));
-            }
-            return numbers;
-        }
-        
-        function generatePairs(count) {
-            const pairs = [];
-            for (let i = 0; i < count; i++) {
-                const num1 = getRandomNumber(0, 9);
-                const num2 = getRandomNumber(0, 9);
-                pairs.push(`${num1}${num2}`);
-            }
-            return pairs;
-        }
-        
-        function getCurrentDate() {
-            const now = new Date();
-            const day = String(now.getDate()).padStart(2, '0');
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const year = now.getFullYear();
-            return `${day}-${month}-${year}`;
-        }
-        
-        function getRandomShio() {
-            return shioList[Math.floor(Math.random() * shioList.length)];
-        }
-        
-        // Generator Functions
-        const generators = {
-            1: function() { return generateTogelPrediction('TOTO WUHAN'); },
-            2: function() { return generateTogelPrediction('HONGKONG SIANG'); },
-            3: function() { return generateTogelPrediction('SYDNEY POOLS'); },
-            4: function() { return generateTogelPrediction('TAIPING POOLS'); },
-            5: function() { return generateTogelPrediction('SINGAPORE POOLS'); },
-            6: function() { return generateTogelPrediction('MALAYSIA POOLS'); },
-            7: function() { return generateTogelPrediction('ETAWAH POOLS'); },
-            8: function() { return generateTogelPrediction('HONGKONG POOLS'); }
-        };
-        
-        function generateTogelPrediction(marketName) {
-            const tanggal = getCurrentDate();
-            const angkaMain = generateRandomNumbers(4).join(' ');
-            const bbfs = generateRandomNumbers(5).join(' ');
-            const shio = getRandomShio();
-            const colokAngka = generateRandomNumbers(2).join(' ');
-            
-            // Generate TOP 2D (25 pairs in 5 rows)
-            const top2d = [];
-            for (let i = 0; i < 5; i++) {
-                const row = generatePairs(5);
-                top2d.push(row.join(' '));
-            }
-            
-            // Generate ANGKA PANAS (3 pairs)
-            const angkaPanas = generatePairs(3).join(' ');
-            
-            // Build result string
-            return `Prediksi Togel - ${marketName} -
-TANGGAL  ${tanggal}
-ANGKA MAIN : ${angkaMain}
-BBFS : ${bbfs}
-SHIO : ${shio}
-COLOK ANGKA : ${colokAngka}
- 
-TOP 2D :
-${top2d[0]} 
-${top2d[1]} 
-${top2d[2]} 
-${top2d[3]} 
-${top2d[4]}
- 
-ANGKA PANASNYA : ${angkaPanas}`;
-        }
-        
-        // ============================================
+</div><!-- #app -->
 
-        // Create floating particles
-        function createFloatingParticles() {
-            const container = document.getElementById('particlesContainer');
-            const particleCount = 50;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                particle.style.animationDelay = Math.random() * 5 + 's';
-                particle.style.width = (Math.random() * 4 + 2) + 'px';
-                particle.style.height = particle.style.width;
-                container.appendChild(particle);
-            }
-        }
+<div class="toast" id="toast"></div>
 
-        // Toggle theme
-        function toggleTheme() {
-            const body = document.body;
-            const icon = document.getElementById('themeIcon');
-            const text = document.getElementById('themeText');
-            
-            body.classList.toggle('dark-theme');
-            
-            if (body.classList.contains('dark-theme')) {
-                icon.textContent = '☀️';
-                text.textContent = 'Light';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                icon.textContent = '🌙';
-                text.textContent = 'Dark';
-                localStorage.setItem('theme', 'light');
-            }
-        }
+<script>
+/* =========================================================
+   AURORA BACKGROUND
+========================================================= */
+(function() {
+  const canvas = document.getElementById('aurora-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H;
 
-        // Load theme preference
-        function loadTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark-theme');
-                document.getElementById('themeIcon').textContent = '☀️';
-                document.getElementById('themeText').textContent = 'Light';
-            }
-        }
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
 
-        // Load theme and initialize
-        window.addEventListener('DOMContentLoaded', function() {
-            // Load theme
-            loadTheme();
-            
-            // Create particles
-            createFloatingParticles();
-            
-            // Load logo
-            const logoImg = document.getElementById('logoImage');
-            const logoPlaceholder = document.querySelector('.logo-placeholder');
-            
-            if (logoImg && LOGO_URL) {
-                logoImg.src = LOGO_URL;
-                logoImg.onload = function() {
-                    logoPlaceholder.style.display = 'none';
-                    logoImg.classList.add('visible');
-                };
-                logoImg.onerror = function() {
-                    console.log('Logo tidak ditemukan, menggunakan placeholder');
-                };
-            }
-        });
+  const bands = [
+    { y: 0.28, amp: 0.10, speed: 0.00018, phase: 0,    hue1: 160, hue2: 190, alpha: 0.22 },
+    { y: 0.42, amp: 0.13, speed: 0.00013, phase: 1.5,  hue1: 140, hue2: 170, alpha: 0.18 },
+    { y: 0.18, amp: 0.08, speed: 0.00022, phase: 0.8,  hue1: 170, hue2: 210, alpha: 0.15 },
+    { y: 0.55, amp: 0.09, speed: 0.00010, phase: 2.3,  hue1: 150, hue2: 180, alpha: 0.14 },
+    { y: 0.35, amp: 0.06, speed: 0.00028, phase: 3.1,  hue1: 180, hue2: 220, alpha: 0.10 },
+  ];
 
-        // Generate function with auto-copy
-        function generate(number) {
-            const outputBox = document.getElementById('outputBox');
-            const button = event.target.closest('.gen-button');
-            
-            // Add loading state
-            button.disabled = true;
-            const originalHTML = button.innerHTML;
-            button.innerHTML = '<span>Bentar..<span class="loading"></span></span>';
-            
-            // Simulate async generation
-            setTimeout(() => {
-                try {
-                    const result = generators[number]();
-                    
-                    // Add fade-in animation
-                    outputBox.classList.add('animating');
-                    outputBox.textContent = result;
-                    outputBox.classList.remove('empty');
-                    
-                    // Remove animation class after animation completes
-                    setTimeout(() => {
-                        outputBox.classList.remove('animating');
-                    }, 500);
-                    
-                    // Auto copy to clipboard
-                    navigator.clipboard.writeText(result).then(() => {
-                        const marketName = button.querySelector('span').textContent.replace('🔸 ', '');
-                        showToast(`✅ ${marketName} - Done wak!`, 'success');
-                    }).catch(err => {
-                        const marketName = button.querySelector('span').textContent.replace('🔸 ', '');
-                        showToast(`⚠️ ${marketName} - Prediksi berhasil, copy manual gagal`, 'warning');
-                    });
-                    
-                } catch (error) {
-                    outputBox.textContent = `Error: ${error.message}`;
-                    showToast('❌ Terjadi kesalahan!', 'error');
-                }
-                
-                // Restore button
-                button.disabled = false;
-                button.innerHTML = originalHTML;
-            }, 800);
-        }
+  let t = 0;
 
-        // Toast notification
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.style.background = type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#f59e0b';
-            toast.classList.add('show');
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-    </script>
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#030a0e';
+    ctx.fillRect(0, 0, W, H);
+
+    if (!draw._stars) {
+      draw._stars = Array.from({length: 180}, () => ({
+        x: Math.random(), y: Math.random(),
+        r: Math.random() * 1.2 + 0.2,
+        b: Math.random()
+      }));
+    }
+    draw._stars.forEach(s => {
+      const blink = 0.35 + 0.65 * (0.5 + 0.5 * Math.sin(t * 0.002 + s.b * 20));
+      ctx.beginPath();
+      ctx.arc(s.x * W, s.y * H * 0.65, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(180,240,220,${blink * 0.7})`;
+      ctx.fill();
+    });
+
+    bands.forEach(b => {
+      const cy = b.y * H;
+      const waveH = b.amp * H;
+      const grad = ctx.createLinearGradient(0, cy - waveH * 2, 0, cy + waveH * 2);
+      const hue = b.hue1 + ((b.hue2 - b.hue1) * (0.5 + 0.5 * Math.sin(t * 0.0003)));
+      grad.addColorStop(0,   `hsla(${hue},100%,65%,0)`);
+      grad.addColorStop(0.3, `hsla(${hue},100%,60%,${b.alpha * 0.5})`);
+      grad.addColorStop(0.5, `hsla(${hue},100%,58%,${b.alpha})`);
+      grad.addColorStop(0.7, `hsla(${hue + 25},100%,55%,${b.alpha * 0.5})`);
+      grad.addColorStop(1,   `hsla(${hue + 25},100%,50%,0)`);
+
+      ctx.beginPath();
+      ctx.moveTo(0, cy);
+      const steps = 80;
+      for (let i = 0; i <= steps; i++) {
+        const x = (i / steps) * W;
+        const wave =
+          Math.sin(x * 0.004 + t * b.speed + b.phase) * waveH * 0.6 +
+          Math.sin(x * 0.009 - t * b.speed * 1.3 + b.phase * 2) * waveH * 0.3 +
+          Math.sin(x * 0.002 + t * b.speed * 0.7) * waveH * 0.1;
+        ctx.lineTo(x, cy + wave);
+      }
+      ctx.lineTo(W, cy + waveH * 2.5);
+      ctx.lineTo(0, cy + waveH * 2.5);
+      ctx.closePath();
+      ctx.fillStyle = grad;
+      ctx.fill();
+    });
+
+    const topGrad = ctx.createRadialGradient(W * 0.5, -H * 0.1, 0, W * 0.5, -H * 0.1, W * 0.8);
+    topGrad.addColorStop(0, `rgba(0,180,140,0.09)`);
+    topGrad.addColorStop(1, `rgba(0,0,0,0)`);
+    ctx.fillStyle = topGrad;
+    ctx.fillRect(0, 0, W, H);
+
+    t++;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+(function() {
+  const container = document.getElementById('particlesContainer');
+  for (let i = 0; i < 40; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (Math.random() * 12 + 10) + 's';
+    p.style.animationDelay = Math.random() * 8 + 's';
+    const sz = (Math.random() * 3 + 2) + 'px';
+    p.style.width = sz;
+    p.style.height = sz;
+    container.appendChild(p);
+  }
+})();
+
+/* =========================================================
+   PAGE SWITCHING
+========================================================= */
+function showPage(name) {
+  // Hide all pages
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  // Show target page
+  document.getElementById('page-' + name).classList.add('active');
+  // Update nav buttons
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('nav' + name.charAt(0).toUpperCase() + name.slice(1)).classList.add('active');
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* =========================================================
+   SLOT GACOR DATA & LOGIC
+========================================================= */
+const providers = {
+  "Pragmatic Play": ["Big Bass Football Bonanza","Sweet Bonanza 2500","Mahjong Wins 2","Fortune of Olympus","Caishens Cash Pots","Mahjong Wins - Gong Xi Fa Cai","Gates of Gatot Kaca Super Scatter","Gates Of Olympus Super Scatter","Starlight Wins","Lucky Phoenix","Lucky Tiger 1000","Lucky Tiger","Lucky Mouse","Gates Of Olympus 1000","Gates Of Olympus","Mahjong Wins 3 Black Scatter","Starlight Princess 1000","Sweet Bonanza 1000","Starlight Princess","Gates Of Gatotkaca 1000","Sweet Bonanza","Sugar Rush 1000","Pyramid Bonanza","Wisdom Of Athena 1000","Gates Of Olympus 1000 XMAS","Sweet Bonanza XMAS","Gates Of Olympus 1000 DICE","Aztec Gems","Mahjong Wins BONUS","Gates Of Gatotkaca","Bonanza Gold","Cash Surge","Big Bass Bonanza 1000","5 Lions Reborn","Lucky Monkey","Wild West Gold","Great Rhino Megaways","Madame Destiny Megaways","Power Of Thor Megaways","Buffalo King Megaways","5 Lions Megaways","Down The Rails","Wild Hop & Drop","Book Of Aztec King","Fire Strike 2","Floating Dragon Megaways","Crown Of Fire","Legend Of Heroes Megaways","Wild Hop & Drop","Sword Of Aries","Lucky Fishing Megaways","Dragon Hero","Gates Of Aztec","Mammoth Gold Megaways","Zeus vs Typhon","Big Bass Splash 1000","Lucky Fortune Tree","Gates Of Pyroth","Starlight Princess SuperScatter","Gates Of Gatotkaca SuperScatter"],
+  "PGSoft": ["Majestic Empire","Grimms Bounty: Hansel & Gretel","Galaxy Miner","Dragons Treasure Quest","Diner Frenzy Spins","Jack the Giant Hunter","Mahjong Ways","Mahjong Ways 2","Wild Bounty Showdown","Wild Bandito","Lucky Neko","Treasures of Aztec","Ways of the Qilin","Gemstones Gold","Wild Ape #3258","Pinata Wins","Cocktail Nights","Mafia Mayhem","Anubis Wrath","Jurassic Kingdom","Geisha's Revenge","Dragon Hatch 2","Queen of Bounty","The Great Icescape","Cai Shen Wins","Speed Winner","Dead Mans Riches","Knockout Riches","Doomsday Rampage","Graffiti Rush","Mr Treasures Fortune","Fortune Snake","Three Crazy Piggies","Wings of Iguazu","Yakuza Honor","Shark Bounty","Zombie Outbreak","Futebol Fever","Chicky Run","Mystic Potion","Cash Mania","Fortune Dragon","Werewolf's Hunt","Tsar Treasures","Forge of Wealth","Wild Heist Cashout","Ninja Raccoon Frenzy","Gladiator's Glory","Safari Wilds","Cruise Royale","Fruity Candy","Lucky Clover Riches","Fortune Rabbit","Bakery Bonanza","Rave Party Fever","Midas Fortune","Asgardian Rising","Diner Delights","Alchemy Gold","Wild Coaster","Legend of Perseus","Lucky Piggy","Dreams of Macau","Ganesha Fortune","Dragon Hatch","Legendary Monkey King","Fortune Gods","Dragon Legend","Prosperity Lion","Songkran Splash","Hawaiian Tiki","Fish Prawn Crab","Battleground Royale","Rooster Rumble","Butterfly Blossom","Destiny of Sun & Moon","Garuda Gems","Fortune Tiger","Oriental Prosperity","Mask Carnival","Emoji Riches","Spirited Wonders","Buffalo Win","Supermarket Spree","Candy Bonanza","Fortune Ox","Jack Frosts Winter","Bali Vacation","Opera Dynasty","Thai River Wonders","Guardians of Ice & Fire","Jewels of Prosperity","Galactic Gems","Wild Fireworks","Phoenix Rises","Circus Delight","Candy Burst","Bikini Paradise","Fortune Mouse","Ninja vs Samurai","Vampires Charm","Captains Bounty","Journey to the Wealth","Double Fortune","Ganesha Gold","Symbols Of Egypt","Jungle Delight","Legend of Hou Yi","Hip Hop Panda","Hotpot","Tree of Fortune","Plushie Frenzy","Win Win Won","Reel Love","Hood vs Wolf","Medusa 1: the Curse of Athena","Medusa 2: the Quest of Perseus","Mighty Mania","Gem Saviour","Reel Royale Showdown","Honey Trap of Diao Chan","Funky Fortunez","Skylight Wonders","Pharaoh Royals","Kraken Gold Rush"],
+  "JILI": ["Supernova","Fortune Hook Boom","Lucky Macaw","Super Ace","Fortune Garuda 500","Super Ace Deluxe","Fortune Gems 3","Golden Empire","Fortune Gems 2","Fortune Gems","Boxing King","Circus Joker 4096","Fortune Gems 500","Super Ace II","Crazy777 2","Fortune Coins","Fortune Coins 2","Money Coming Expand Bets","Pirate Queen 2","3 Super Ace","Money Pot","Charge Buffalo","Mega Ace","Fortune Gems Legend","Bison Fortune Coins","Lucky Jaguar 500","3 Lightning Blitz","ROMA X 10000","Super Mahjong Deluxe","Coin of Lightning","3 Coin Wild Tiger","Jackpot Joker FEVER","Clover Coins 4x4","40 Sparkling Crown","Party Ape","Cash Coin","20 Blazing Clover","3 Lucky Baozhu","Super Mahjong","3 Coin Golden Ox","Money Coming 2","Money Pot Deluxe","Lucky Jaguar 2","Joker Coins","10 Sparkling Crown","Roma X Deluxe","3 Witchs Lamp","Boxing King Title Match","3 Coin Wild Horse","3 Coin Treasures 2","3 Lucky Lion","3 Charge Buffalo","Crystal 777 DELUXE","Golden Empire 2","Fruity Wheel","Lucky Jaguar","Super Ace Joker","Safari King","3 Lucky Piggy","Golden Bank 2","Safari Mystery","Shogun","Poseidon","Lucky Doggy","3 Pot Dragons","Nightfall Hunting","Treasure Quest","Fortune Monkey","Jackpot Joker","Potion Wizard","Egypt's Glow","The Pig House","Charge Buffalo Ascent","Devil Fire 2","Zeus","Party Star","Dabanggg","Bangla Beauty","Cricket Sah 75","Arena Fighter","Witches Night","Cricket King 18","King Arthur","Aztec Priestess","Trial of Phoenix","Sweet Land","Devil Fire","Golden Temple","Golden Joker","Wild Ace","Legacy of Egypt","Elf Bingo","Sin City","Pirate Queen","JILI Caishen","Gold Rush","Ali Baba","Roma X","Pharaoh Treasure","Golden Bank","Fengshen","Crazy 777","Seven Seven Seven","Jungle King","Coin Tree","Master Tiger","Wild Racer","World Cup","Neko Fortune","Bonus Hunter","Samba","Mayan Empire","Thor X","Bone Fortune","Happy Taxi","Agent Ace","Magic Lamp","Twin Wins","Medusa","Super Rich","Lucky Coming","Book of Gold","Party Night","Monkey Party","Golden Queen","Lucky Goldbricks","Diamond Party","Xi Yang Yang","Crazy FaFaFa","Night City","Bao boon chin","Fortune Pig","Bubble Beauty","Hawaii Beauty","Candy Baby","Fa Fa Fa","Shanghai Beauty","Hyper Burst","Lucky Ball","Gem Party","War Of Dragons","Fortune Tree","Hot Chilli","God Of Martial","Chin Shi Huang"],
+  "Megawin": ["Mahjong Hit +","Mahjong Hit","Mahjong Hit 2+","Crazy Mahjong","Mahjong Hit 2","Poseidon","Super Ace","Xi Bo Ba Hit","Bounty Loki","Xi Bo Ba Hit 2","Fu Dai Lian Lian - Dragon","Happy Hit","Fu Dai Lian Lian - Panda","Crazy Sheep","Dragon Arena","Pine of Plinko 2","5 CaiShen","5 Dragons","Mega ACE","Xi Bo Ba","Water Margin","Outlawed Heroes","Happy Farm","Duo Fu Duo Cai","Lucky - 88 Flower","Ji Xiang Ru Yi","Fortune - Blooming Riches","Journey to the West","Lucky - 88 Riches","Lucky - 88 Treasures","Lucky - 88 Diamond","Lucky - 88 Drum","Golden 777","Fa Da Cai","Triple Fish","Wealth - 88 Flower","Wealth - 88 Riches","Wealth - 88 Treasures","Wealth - 88 Diamond","Wealth - 88 Drum","Fortune - Rolling Riches","Fortune - Infinite Treasure","Fortune - Dazzling Diamond","Fortune - Golden Drum","Gold Panda","Maneki Neko","Eyes of Fortune","Dragon Riches","Emperor Treasure","Golden Toad","Lucky Fish","King-777","VIP Club","Gold Rush"],
+  "Habanero": ["Nuwa Deluxe","Genie's Showtime","Prosperity Horse","Koi Gate","Hot Hot Fruit","Mystic Fortune Deluxe","Laughing Buddha","Wealth Inn","Happiest Christmas Tree","5 Lucky Lions","Wild Trucks","Lantern Luck","Hot Hot Halloween","Legendary Beasts","Soju Bomb","Fa Cai Shen","Fortune Dragon Joy","Four Divine Beasts","Lucky Lucky","Jump!","Fa Cai Shen Deluxe","Gold Koi Fortune","Safari Rumble","Indiana Wolf","Shivering Strings","Oceans Call","Koi Koi Treasure","Totem Towers","Taberna De Los Muertos Ultra","Santas Village","Dragons Throne","Kanes Inferno","Aztlans Gold","Blackbeards Bounty","Dragons Realm","King Tuts Tomb","Raiden Shogun","Mount Mazuma","Fortune Dogs","Pumpkin Patch","Egyptian Dreams","Zeus","London Hunter","Treasure Tomb","Queen of Queens II","The Big Deal","Presto!","Knockout Football","Egyptian Dreams Deluxe","Zeus 2","Panda Panda","Fire Rooster","12 Zodiacs","Ways Of Fortune","5 Mariachis","Fenghuang","Bird of Thunder","The Dead Escape","Gold Rush","Sparta","Coyote Crash","Dragon Castle","Lucky Fortune Cat","JellyFish Flow","JellyFish Flow Ultra","Happy Ape","Taberna De Los Muertos","Christmas Gift Rush","Calaveras Explosivas","Nine Tails","Lucky Durian","Mighty Medusa","Dragon Tiger Gate","Naughty Wukong","Siren's Spell","Crystopia","Legend of Nezha","Witches Tome","Santa's Inn","Hot Hot Summer","Wild Flow","Golden Taj Mahal","Arctic Hunt","Waltz Beauty","Glory of Rome","Jump! 2","Poseidon","Baba Yaga","Carnival Cove","Japanese Mask","Super Fruit Blast","Love And Riches: Eldorado","Daruma Impact","Mummy Hunter","Gladiator Royal","Mystic Shaman"],
+  "Spade": ["Going Bananas Inc.","Galaxy Guardian","Christmas Tree of Wonders","Legacy of Kong Maxways","Royale House","Clash of the Giants","Royale Vegas","Mahjong Riches","Royal Katt","Gold Panther Maxways","888","Caishen","Brothers Kingdom","Fiery Sevens","Poker Ways","Wild Wet Win","Santa Wild Drop","Golden Lotus SE","Dancing Fever","Gold Rush Cowboy","Dragon Wish","Legacy of Ramakien","Roma","Fury Max Lucky Road","Fiery Sevens Hot 100","Fruit Ninja Fury","Lucky Horse","Sweet Bakery","Lucky Twin Sea","Happy Neko","Golden Pixiu","5 Fortune Dragons","Mister Cashmore","Tiger Dance","Pirates Gold Rush","Fiery Sevens Exclusive","Mayan Gems","Fruits Mania","Captain Golds Fortune","Alchemy Quest Jackpot","Lucky Snake Wheel","Fiery Sevens Hot 5","Fiery Sevens Hot 20","Fiery Sevens Hot 50","Love Idol","Halloween Vacation","Gold West","Secrets of Anubis","Brothers Kingdom 2","Magic Kitty","Moji Mania","Gemstone Rush","Candy Pop 2","Rabbit Riches","Crazy Bomber","Sugar Party","Candy Candy","Sugar Bonanza","Triple Panda","Gold Panther","Mr Chu Tycoon","Prosperity Gods","FaFaFa","Ho Yeah Monkey","Golden Monkey","FaFaFa2","168 Fortunes","Princess Wang","Baby Cai Shen","Lucky Koi","Highway Fortune","Golden Chicken","Candy Pop","Tiger Warrior","5 Fortune","Emperor Gate","Big Prosperity","Great Stars","Golden Whale","Adventure Iceland","Double Fortune","Dragon Gold","Magical Lamp","Heroes","Dragon Empire","Money Mouse","Book of Myth","Double Flame","Jokers Treasure","Mega 7","Rise of Werewolves","Legendary Beasts Saga","Rich Caishen","Muay Thai Fighter","Sexy Vegas","Space Conquest","Journey to the Wild","Panda Opera","Christmas Miracles","Hammer of Thunder"],
+  "NoLimit": ["Tsar Wars","Dead Men Walking","Kill Em All","Mental","Duck Hunters","The Crypt","Fire in the Hole 3","Seamen","Mental 2","Tanked","Das xBoot","Highway to Hell","Fire in the Hole 2","Punk Rocker 2","Tombstone Rip","Road Rage","Blood & Shadow","Dead Canary","Blood & Shadow 2","Stockholm Syndrome","Skate or Die","Deadwood R.I.P","Outsourced Payday","Gator Hunters","Brute Force: Alien Onslaught","Flight Mode","Blood Diamond","Home of the Brave","Dead, Dead, or Deader","Tombstone Slaughter","xWays Hoarder 2","Munchies","Outsourced: Slash Game","Brute Force","San Quentin 2: Death Row","Outsourced","Apocalypse Super xNudge","Beheaded","Loner","Kenneth Must Die","Tombstone: No Mercy","Possessed","Nine To Five","Serial","Punk Toilet","Pixies vs Pirates","Infectious 5 xWays","Folsom Prison","Fire in the Hole xBomb","Dragon Tribe","Deadwood xNudge","Brick Snake 2000","D Day","Land of the Free","Devils Crossroad","Jingle Balls","Road Kill","Ugliest Catch","Space Donkey","DJ Psycho","True Kult","Bounty Hunters","The Cage","Pearl Harbor","Gluttony","Whacked","Disturbed","Kiss My Chainsaw","Walk of Shame","Benji Killed In Vegas","WiXX","Warrior Graveyard xNudge","True Grit Redemption","Tombstone","Tomb of Nefertiti","Thor Hammer Time","San Quentin xWays","Rock Botto","Remember Gulag","Punk Rocker","Poison Eve","Owls","Monkeys Gold xPays","Misery Mining","Milky Ways","Mayan Magic Wildfire","Manhattan Goes Wild","Little Bighorn","Legion X","Karen Maneater","Immortal Fruits","Ice Ice Yeti","El Paso Gunfight xNudge","Coins of Fortune","Bushido Ways xNudge","Buffalo Hunter","Book Of Shadows","Bonus Bunnies","Barbarian Fury"],
+  "FastSpin": ["Goal Go Win","Nutty Riches","Imperial Majesty","The Great Safari","Mahjong Princess","Adventure To The West","Royale House","Wild Calavera","Golden Moon Empire","Neko Riches","Spirit of the Sea","The Nutcrackers","Ranger Showdown","The Maya Myth","Mighty Sevens","Royal Katt","Yeti Boom","Tiki Rush","Poker Ways","Fortune Jewels III","Golden Horse Ride","Frosty and Flamy","Fortune Jewels II","Wild Mafia","Spin and Win","Snake Treasure","Sweet Frenzy","Nezha","Roma","Boxing Fury","Rich Cai Shen","Pai Gow Ways","Muay Thai Fighter","Leprechaun Bonanza","Jungle Quest","Gold Rush Cowboys","Fruits Mania","Fortune Jewels I","Candy Super Tumble","Pumpkins Go Lucky","Beasts of Luck","Blade of Fortune","Alien Smash","Apollo Ray of Luck","Wild Wet Win","Sexy Vegas","Triple Happiness","Space Conquest","Safari Blitz","Oceanic Melodies","Neon Fantasy","Money Empire","Money Dragon","Mushroom Bandit","Mining Bonanza","Loki","Legend of Nian","Lucky Fortune","Legend of Eagle","Honey Trap","Heavenly Fortunes 2","Heavenly Fortunes","God of Wealth","Ganesha Luck","Goddess of Egypt","Fortune Lions","Fiery Lava","Farm of Fortune","Caribbean Riches","City of Jewels"],
+  "Joker": ["Fortune Crown AI","Cursed Deluxe AI","Ancient Rome Deluxe AI","Roma","Roma Legacy","Golden Dragon","Sizzling Hot","Immortals","Mayan Gems","Roma Deluxe","Mahjong King","Respin Mania","Dragon Power Flame","Zhao Cai Jin Bao","Bagua","Thunder God","Scheherazade","Caishen Riches","Safari Heat","Hot Fruits","Ong Bak 2","Zodiac Deluxe","Bali","Moon Goddess","Maya Ways","Super Seven Seas","God Of The Underworld","Fortune Clover 40","Heavenly Beasts","Blockade Runner","Fire Master Hold And Win","Dragon Ball","Fortune Crown Gold Gift","Steamboat Ride: Hold And Win","Savage Frontier Hold And Win","Super Wild Watermelon","Seven Seas","Fortune Crown 25","Inca","Ramesses Relics","Winds of Wealth","Legend of Persia","Fortune Crown","Fire Temple","World of Emoji","Carnaval Do Rio","Black Knight","Snake of Fortune","Hawaii Vacay","Christmas Eve","Mahjong Reactor","Hot Wheels","Bull Street","Wild Watermelon","Trick Or Treat","Third Prince's Journey","Dolphins Pearl Deluxe","Captains Treasure Pro","Witch's Brew","Cluster Mania","Tsai Shen's Gift","Tigers Lair","Dragon's Realm","Pharaoh's Tomb","Buccaneer Deluxe","Heist Deluxe","Dia De Los Muertos Deluxe","Qatar 2022","Golden Sea","Sour Candy","Love Letter","Masquerade","Gates Of Wealth","Huang Fei Hong","Silver Hand","Sweetie Crush","Panda Chef","Mermaid Treasure","Lion Of The East","Warrior","Date With Miyo","Kraken Hunter","Fruit Paradise","Majapahit","The Legend of White Snake","Wealth God","Wukong","Genie 2","Street of Chicago","Wild Fairies","Chilli Hunter","Lady Hawk","Burning Pearl","Lightning God","Neptune Treasure","Wild Giant Panda","Phoenix 888","Bushido Blade","Enter The KTV","Lucky God Progressive","Sweet Tooth","Alice In Wonderland","Three Kingdoms 2","Santa Workshop","Enchanted Forest","Feng Huang","Tropical Crush","Gold Trail","Forest Treasure","Haunted House","Bounty Hunter","Aztec Temple","Fortune Festival","Flames Of Fortune","Fire Reign","Black Beard Legacy","Joker Madness","Journey To The West","Bagua 2","Tai Shang Lao Jun","Yggdrasil","Peach Banquet","Money Vault","Four Dragons","Ancient Artifact","Lucky Rooster","Four Tigers","Empress Regnant","Lions Dance","Chinese Boss","Jin Fu Xing Yun","Xuan Pu Lian Huan","Ni Shu Shen Me","Fat Choy Choy Sun","Power Stars","Book Of Ra Deluxe","Dolphin Treasure","Fifty Lions","Queen Of The Nile","Geisha","Lord Of The Ocean","Lucky Lady Charm","Book Of Ra","Fifty Dragons","Columbus","Dragon Phoenix","Water Margin","Ancient Egypt","Supreme Caishen","White Snake","Three Kingdoms Quest","Monkey King","Aladdin","Golden Island","Mulan","Happy Buddha","Golden Rooster","Wild Spirit","Arctic Treasure","Five Tiger Generals","Lucky Drum","Lucky Panda","Queen","Hercules","Ocean Paradise","Happy Party","Golden Monkey King","Panther Moon","Thai Paradise","Genie","Safari Life","A Night Out","Silver Bullet","Bonus Bear","Dolphin Reef","Highway Kings","Sparta","Azteca","Great Blue","Football Rules"],
+  "Hacksaw": ["Sand and Ashes","Magic Piggy OG","Le Digger","Wanted Dead or a Wild","Le Bandit","Ze Zeus","Duel at Dawn","RIP City","Le Pharaoh","Cloud Princess","Double Rainbow","FRKN Bananas","Fist Of Destruction","Life and Death","Jelly Slice","SixSixSix","2 Wild 2 Die","Le Viking","ITERO","Cash Crew","Keep'em","Evil Eyes","Chaos Crew 2","Chaos Crew","Gladiator Legends","Hand of Anubis","Dork Unit","Rotten","Pug Life","Temple of Torment","Stormforged","Keep 'em Cool","Cursed Seas","Densho","Xmas Drop","Rusty & Curly","Bouncy Bombs","Beam Boys","Dawn of Kings","Orb of Destiny","Divine Drop","Slayers Inc","Cursed Crypt","Twisted Lab","Dragon's Domain","Donny Dough","Octo Attack","Get the CHEESE","Rise of Ymir","Wings of Horus","Snow Slingers","Shaolin Master","Donut Division","Fire my Laser","Klowns","Phoenix Duel Reels","Marlin Masters","Hounds of Hell","Dorks of the Deep","Strength of Hercules","Danny Dollar","Pray for Three","Spinman","Ultimate Slot of America","Booze Bash","Fred's Food Truck","Le King","Rainbow Princess","Marlin Masters: The Big Haul","Bullets and Bounty","Miami Mayhem","Le Zeus","Stormborn","The Luxe","The Count","Bash Bros","Tiger Legends","Le Cowboy","Sun Princess","Forbidden Fury","Belle the Blade Hunter","Grinning Harvest","Spear of Athena","Le Santa","Miss Candys Sweet Escape","Toshi Ways Club","Army of Ares","Jaws of Justice","Donny & Danny","Zeus Ze Zecond","Le Fisherman","Pray For Six","Deal With Death","Circle Of Life","Smoking Dragon","Hot Ross","Superstar Sevens","Dusk Princess","Dark Spiral","Eternal Duel","Le Bunny","Epic Bullets and Bounty","Munchy Milo","Power of Ten","Dynasty of Death","Immortal Desire","Break Bones","Book of Time","Gronk's Gems","Frank's Farm","Magic Piggy","Bloodthirst","Ronin Stackways","Fear the Dark","Mayan Stackways","Beast Below","Mighty Masks","Drop'em","Vending Machine","Eye of the Panda","Benny The Beer","Alpha Eagle","Feel The Beat","Dark Summoning","Wishbringer","Reign of Rome","Rad Maxx","Fighter Pit","The Luxe H.V","Eye of Medusa","Aiko and the Wind Spirit","Invictus","Chaos Crew 3","Alchemist Wonders","Steamrunners","Xpander","OmNom","Cubes","Miami Multiplier","Cash Compass","The Respinners","Aztec Twist","Cubes 2","Let It Snow","Mystery Motel","Frutz","Stack'em","Toshi Video Club","Hop'n'Pop","Stick'em","Tasty Treats","Cash Quest","Rocket Reels","Joker Bombs","King Carrot","Warrior Ways","The Bowery Boys","Harvest Wilds","Buffalo Stack'n'Sync","Time Spinners","Forest Fortune","Born Wild","Undead Fortune","Fruit Duel"],
+  "Micro": ["Wrath of Seth-Split","Ultimate Goal Blitz","Grand Casino Heist","Mahjong Maxwin","Lucky Twins Wilds Link&Merge","Almighty Zeus Wilds Link&Merge","Money on Reels Super Arrow","Pirate's Fight for Fortune","Nova Blast Ultra","Sugar Mania 8000","Pong Pong Mahjong 2","Pocket Ace","Lucky Twins Wilds","Candy Rush Wilds","Almighty Zeus Empire","Mayan Boost","Bass Catch SUPER UP","Lucky Twins Wilds Jackpots","Kong's Jungle Tower","12 Skulls of the Dead","Pong Pong Mahjong Jackpots","Cluckin' Sweet Feast","Merlin's Secret Maxways","Yami Warriors","Bronco Big Bounty","Bonny's Treasures","Mummy Lock Riches","Money On Reels","Dragon's Rhythm Link&Win","Break Away Gold","Star Stash Wild 7's","Bountiful Birds","Joker Burst Frenzy","Chicken Night Fever","Joker Ice Frenzy Epic Strike","Bears Make Bank! Power Combo","Diamond Inferno","Moonlight Romance - The Awakening","Andvari The Golden Fish","Diamond Diva Oink Bonanza","African Wilds","Fire & Diamond Joker","African Quest","Prosperity Blessing","Golden Cat Fortunes","Red Hot Riches","Cash Blitz Extreme","Treasure Gems","10000 Fortunes","Tiger's Treasures","Ultra Ace","Bass Catch Super Luck","Lucky Rainbow Rush","Luck of the Devil: Power Combo","Pizza Fiesta","Arctic Wolf Triple Riches","Book of Wolves","Hades Lost Treasures","Mammoth Triple Riches","Gold Infinity","Aztec Triple Riches Power Combo","Cash Blitz","Carnaval Fiesta","Frankenstein","3 Angels Power Combo","Royal Thunder Riders","Money Dragon","Hatching Gold! Rooster's Riches","Lucky Twins & 9 Lions","Reign of Fire","Kung Pao Panda","Treasure Stacks Wilds","Heavenly Elephant Fortune","3 Blazing Volcanoes Power Combo","Almighty Poseidon Empire","Treasure Stacks","Mighty Panda","Shark Platinum","Almighty Athena Empire","Crazy Bob Bonanza","9 Enchanted Beans","Fire and Roses Jolly Joker","Dragon's Loot Link&Win 4Tune","Gods & Pyramids Power Combo","Gold Blitz Extreme","Asgardian Fire","Tiki Tiki Boom","The Eternal Widow","Gem Fire Frenzy","Queens of Ra","Legendary Treasures","Break Away Max","Fishin' Pots of Gold Gold Blitz","9 Pots of Gold Megaways","Amazon - Lost Gold","Champions of Olympus","Dog Days","Fish 'Em Up","Magic Jokers","Sugar Craze Bonanza","Monkey Bonanza","Wildfire Wins Extreme","Happy Lucky Cats","Queen of Cairo","Lucky Little Dragons","Massive Gold","3 Laughing Lions Power Combo","Bison Moon","Wolf Blaze Megaways","Dragon's Keep","Doki Doki Fireworks","Chronicles Of Olympus II Zeus","Mining Pots of Gold","Crazy Rich Tigers","Masters of Olympus","Tiger's Ice","Thunderstruck Stormchaser","Sonic Links","Fishin' Bigger Pots Of Gold","Lucky Twins Link & Win","Agent Jane Blonde Max Volume","Big Boom Riches","Doki Doki Parfait","9 Masks of Fire HyperSpins","Book Of Mrs Claus","Cat Clans","Lucky Clucks","Squealin Riches","Chronicles of Olympus X UP","Fortune Rush","Break Da Bank Again MEGAWAYS","Africa X UP","Hyper Gold","Thunderstruck Wild Lightning","Blazing Mammoth","Odins Riches","Oni Hunter Plus","Silver Seas","Queen of Alexandria","Book of King Arthur","Egyptian Tombs","Emerald Gold","Serengeti Gold","Fire Forge","Gold Collector","Oni Hunter","Solar Wilds","Assassin Moon","Break Away Ultra","Emperor of the Sea Deluxe","Gems And Dragons","Ingots of Cai Shen","Shamrock Holmes Megaways","Silverback Multiplier Mountain","Alchemy Fortunes","Neptunes Riches: Ocean of Wilds","Wanted Outlaws","Reel Gems Deluxe","Boom Pirates","Wild Catch","9 Pots of Gold","Lucky Riches Hyperspins","Playboy Fortunes","Football Star Deluxe","Rugby Star Deluxe","9 Masks Of Fire","Long Mu Fortunes","Lucky Twins Jackpot","Jungle Jim and the Lost Sphinx","Lucky Bachelors","Aurora Wilds","Playboy Gold Jackpots","Magic of Sahara","Treasures of Lion City","Basketball Star Deluxe","Dragon Shard","Ancient Fortunes: Zeus","Lara Croft: Temples and Tombs","Relic Seekers","Masters of Valhalla","Robin Hood's Heroes","Break Away Deluxe","Lucky Twins","Basketball Star","Jungle Jim - El Dorado","Candy Rush Wilds 2","Genie's Magic Wishes","Lucky Rumble Power Surge","Pong Pong Mahjong","Almighty Zeus Wilds","Gold Blitz","10000 Wishes","Ancient Fortunes: Poseidon Megaways","Shogun of Time","Jurassic Park Gold","Fishin' Pots Of Gold","Oni Hunter Night Sakura","Dungeons and Diamonds","Aztec Falls","AbraCatDabra","Wildfire Wins","777 Surge","Lucky Leprechaun Clusters","Bolt X UP","Timelines","Ark of Ra","Pile 'Em Up","Money Mines","Adventures Of Doubloon Island","Carnaval Jackpot","Forgotten Island","Immortal Romance","Break Away","Break da Bank Again"],
+  "5G Games": ["Pinata 1000","Olympus Apollo","Legacy Of Aztec","DRAGON TIGER SHOWDOWN","MAHJONG 5 DRAGONS","Wild Bounty","Mahjong Ways 3+","Neko Titan","GOVERNMENT DISCO 2","Fortune Trio","Golden Island","Lucky Tiger","Mahjong Ways 3","Sugar High 5","King's Realm","Mega Ace","Pichu Pichu","Labuby","Tauros Go","Hammer of Vulcan","Throne of Poseidon","Battle of Alliance","Color Bingo","Sugar Frenzy","Book of Egypt","God of Fortune","777","Treasures of Egypt","Fortune Horses","Neko x Neko","Master of Gold Miner","Fiery Boxing","Golden Rhino","Bandito Returns","Opera Panda","Gems Miner","Give Me Fire","God of Fortune 2","Crypto Verse","Master of Gold Miner 2","Golden Legend","Money Tree","Supreme Ace","DJ Seal","Kung Fu Leopard","Grimoire","The Big Blue","G Kong","Sugar Party Candy Gala","Thriller Town"],
+  "NextSpin": ["Fortune Familiar","Buffalo King","Golden West","Sacred Fortune","Bounty Hunt","Treasure of Atlantis","Royal Gems Match","Win Win Neko","Prosperity Snake","Zeus Mighty Wealth","Blue Phantom","Legend of Guan Gong","Cleopatra Fortune","Aztec Gold Treasure","Mahjong Phoenix","Roma","Mahjong Dragon","Roma II","Long Long Long","Lightning Dragon","Big Cai Shen","Classic Fruits 7","7 Dragons","5 Fortune Stars","Candy Bonanza","Candy Bonanza Xmas","Crazy Monkey Deluxe","Crazy Monkey","Double Monkey","Diamond 7","Dolphin dive","Dragon Blitz","Eternal Fire","Fortune Toad","Forest Secret","Fruit Tycoon","Golden Fa","Golden War","Highway Bee","Holy Goat","Honey 888","Hot Smash","Joker King","Lightning Woman","Lucky Gems","Maya Quest","Mr. Hippo","Ocean Chest","Princess Of Crime","Princess of RA","Prosperity Dragon","Ricky Tycoon","Shake Boom Boom","Shake Thai Thai","Soccer King","Super Fortune","Sweet Lava","Taiga 88","Triple Kung Fu Monkey","Triple Monkey","Twinkle Ice"],
+  "CQ9": ["Treasures Of Aztec 2","Mahjong Wilds 3","Legacy of Olympus","Jump High","Rave Jump","Jump High 2","God of War","Jumping Mobile","Lucky Bats","Good Fortune M","Good Fortune","God of War M","Zeus","Fly Out","Disco Night M","Da Hong Zhong","Da Fa Cai","Fa Cai Shen 2","Move n Jump","Lucky Bats M","168 Lucky Bag","Crazy Crazy","Watah Master Turbo","Top Ace 2","Top Ace","Crazy Crazy 2","Super Power Bank","Crazy Crazy 3","Watah Master 2","Mahjong Wilds","Disco Piggy","Mahjong Wilds 2","Watah Master","Mahjong Rich Ways","Sung Wukong","Wild Disco Night","Black Wukong","Go Fishing","Mafia","Hero of the 3 Kingdoms - Cao Cao","The Chicken House","Night City","Mirror Mirror","Treasure Koi","Double Happiness","Sweet 666 Deluxe","Hong Kong Flavor","Diamond Fruit","Songkran","Frozen World","Floating Market","Baseball Fever","Football Fever","888 Cai Shen","Mr. Miser","Lucky Tigers","Dragon Koi","Hot DJ","Greek Gods","Loy Krathong","King Kong Shake","Dollar Bomb","Ganesha Jr.","Aladdins Lamp","Monster Hunter","King of Atlantis","Hot Pinatas","Ninja Raccoon","Burning Xi-You","Oo Ga Cha Ka","The Cupids","Money Tree","Uproar in Heaven","Lord Ganesha","Dragons Treasure","Songkran Festival","Wing Chun","Fortune Dragon","Dragon Ball","Fire Queen 2","Cricket Fever","Six Gacha","Hollywood Pets","Queen Of Dead","Xmas Tales","Wild Fudge","Lucky 3","Treasure of Seti","Dragon Hunters","Fortune Spirits","Boots Of Luck","Golden Mayan","Gold Stealer","Red Phoenix","Zuma Wild","Chicky Parm Parm","Thor 2","888","Sherlock Holmes","Fruit King II","Great Lion","Treasure Island","The Beast War","Sky Lanterns","Football Baby","Football Boots","WonWonWon","Summer Mood","Poseidon","Detective Dee","Magic World","Gophers War","Sakura Legend","Pharaohs Gold","Fruity Carnival","Lucky Boxes","Detective Dee 2","Meow","Zhong Kui","Six Candy","Fire Queen","Wolf Disco","Pyramid Raider","Hot Spin","Yuan Bao","Invincible Elephant","Dragon Heart","Wild Tarzan","Wukong & Peaches","Apsaras","Fortune Totem","SkrSkr","Gu Gu Gu 3","Mr. Rich","Treasure Bowl","Double Fly","Wonderland","Kronos","Wheel Money","6 Toros","Flying Cai Shen","Rave High","Flower Fortunes","So Sweet","Chameleon","WaterWorld","Snow Queen","Fire Chibi 2","5 God beasts","GuGuGu","Fire Chibi M","Apollo","Vampire Kiss","5 Boxing","Funny Alpaca","Oriental Beauty","Wolf Moon","Running Animals","Rave Jump 2","Thor","Fa Cai Shen","Disco Night","777","Shou-Xin","Fire Chibi","Ne Zha Advent","Fa Cai Fu Wa","Hephaestus","MuayThai","Fruit King","Happy Rich Year","Super 5","Hercules","Golden Eggs","Zeus M"],
+  "Advant": ["Royal Ace","Dragon Chi's Quest 2","Piggy Bank Gold 2","Mahjong Roar","Dragon Chi's Quest","Aztec Gold Temple","Aztec: Bonus Hunt 2","Buffalo Rush HIGHROLLER","Golden Egypt","LABUBU: Fall in Wild","Maya: Elemental Totem 2","Crazy Bounty: Jackpot","Pinata Fest","Crazy Bounty","Piggy Bank Gold","Rhapsody of Muertos","Aztec: Bonus Hunt","Buffalo Rush","Dark Ritual","Last Samurai","BlackJack21","Big Net Bass","Genie Mystery","Zeustrike","Zeustrike Xmas","DJ FEVER","Leprechaun's Fortune","Mace of Hercules","Wheel of Gems","Scale of Heaven: Anubis","Infinity Ocean","Jewel Mastermind","Fantastic Beast","Disco 777 Hold and Win","Cai Shen Fortune","Pirate Treasure Hunt","Fighting Bull","Cat & Mouse","Aztec: Bonus Hunt 2 Xmas","Xiang Qi Ways 2","Rush Hour Gold","Jumanji Bonanza","Starry Adventure","Phantom Multiplier","Kingyo Riches","Fish Prawn Crab Bonanza","Ramakien Blessing","Football Fever","Maya: Elemental Totem","Firefly Hunter","Hungry Slime","Disco 777","Boom of Prosperity","World Cup Final","Bunny to the Moon","Cookie Hunter"],
+  "Cosmo": ["Mahjong Fortune 3","Mega Rampage","Thai Splash","Mahjong Fortune","Neko Fortune","Mahjong Fortune 2","Rise of Athena","Rise of Athena 1000","Caribbean Treasure","Kunoichi Bounty 1000","Bunny Bonanza 1000","Wukong Rising","Candy Combo 2","Poker Party","Royal Gems","Pharaohs Gold","Mafia Legends","Battleground Infinity","Golden Wealth","Santa Spins","Kunoichi Bounty","Fruit Fiesta 1000","Samba Soccer","Fishing Mania","Cosmic Riches","Lucky Circus","Neon Party","Slime Quest","Fruit Fiesta","Neon Party 1000","Sushi Master","Demon Slayer","Clover Cottage","Cookie Wonderland","Aladdin's Lamp"],
+  "ShadyLady": ["Preach TV","Swoll","Suck","Devils Finger","Brainwashed","Oops","Office Party","Orphan Organ","Sew","Black Friday","Laced","Truth"],
+  "PlayStar": ["Bounty Express","Deng Deng","Super Gems 2","Mahjong Origin","Knight Arthur","Super Gems","Mahjong Ways 3+","Mahjong Ways 3","Horde 2 Winter","Hiyas Gems","Athena Lucky Spread","777","Necromancer Sha","Treasures Of Aztec Z","Caishen Lucky Spread","Super Lucky","Super Win","For The Horde","What The Fa","Piggy Master","Zeus Of Olympus","Pyramid Of Flames","Mystic Legend 2","Sugar Boom","Lucky Ace","Chef Husky","Crazy 777","Fantasy Southeast Asia","Golden Jade","Super Awesome","Diao Chan Fa Da Cai","Golden Zongzi","Lucky Poker 2","Fish Prawn Crab","Da Fu Gui","Master Haha","Rat Of Wealth","Super Boom","Wu Xia","Fortune Bull","Hand Of God","Tomb Treasure","Super Powerful","Santa Claus","Aurora Wolf","My Lord","Money Meow","Moon Festival","Alchemy","Dragon Boat Festival","Super Rich","Vampire","Rich & Happy","Halloween","Elephant","Fortune Teller","Face Off","Werewolf","Fortune God","Glorious Kingdom","Athena","Double Happiness","Fa Fa Monkey","The Empire","Kung Hei","Lucky Panda","Madame Caroline","India Treasure","China Empress"],
+  "WoW": ["Spin Domino QiuQiu","Robin Hood","Legend of Wusheng 40K","Heibai Wuchang","Barong Sacred Battle","The Four Divine Beasts","Nine Tailed Fox","Trial of the Fire Dragon","Puteri Gunung Ledang","Titan Monster","Flowerish Fairy","Call UFO","Alice in Wonderland","Jungle Treasure","Hang Tuah","Magician","Baahubali","Four Gentlemanly Flowers","Jack and the Beanstalk","Billionaire Party","Night Bar","Fate and Luck","Thor's Hammer","Secret Scroll of Ninja","Wizard of Oz","Fireworks","Legend of Easter Island"],
+  "Live22": ["Queen Femida 2","Mahjong Gold: Lion","Mahjong Gold: Phoenix","Slithering Riches","Queen Femida","Wonder of Hanging Garden","Mahjong Style","Space Quest: Neptune","Kraken Queen","Space Quest: Mars","The Great Sorcery","Space Quest: Moon","Into The Fay: Nixie","Dragon FAFAFA","Bonsai of the Riches","Wonders of Taj Mahal","Crypto Coin","Illuvium Master","Advent of the Dragon","Mobox Olympia","Apes Squad","Into The Fay: Snowie","Lucky Coins","Jarvis","Aztec Legacy","CaiShen Mega Fortune","Mahjong Gold: Dragon","Wonders of Colosseum","Wonders of Grand Canyon","Wonders of Giza Pyramid","God's Gambit: Poseidon","Space Quest: Earth","Classic Diamond X5","Winter Winnings","Great Wall of Meta Dragon","Buffalo Blaze","Panthera Pardus","Quantum Of Giza","Shipwrecked Riches","God's Gambit: Zeus","Goal Rush","God's Gambit Hades","Kingdom of Luck","Santa's Payday","Bloodmoon Amazonia","Block Buster","Fiery Lady","Dragon Wish","Panda Realm","Mask of Truth Jumboways","Fortune Realm","Candy Bomb","Sanctum of Savannah","Into The Fay: Ashley","Fortune Dance","Princess and the Evil Witch","Meta Space","Axie Universe","Dragon's Treasure","Oni Cosmic Atlas"],
+  "SBO Slot": ["Gold Volcano","Halloween","Dynamite Jackpot","Texas Wind","Super Double","5 Dragon Kings","Dragon's Fortune","Elephant King","Big Boss","Gong Xi Fa Cai","Maneki Neko","Christmas Carnivals","Las Vegas Night","Wallow In Money","Deep Loot","Sweet Love","Richest Witch","Delicious Dessert","Lucky Frog","Crazy Bomb","Mysterious Pyramid","Hunting Time","Akira","Steam Punk","Good Luck - Casino Fortunate","Wild West","Sobek's Treasure","Golden Temple","Super Rich","Pirate Treasure","Crazy Gold","Money Tree","Fruit Ripe","Magic Academy","Gems Rush","King of Arena","Millionaire","Lucky Clover","Lucky 777","Disco Jockey","Jump For Richness","Safari","Alice","Happy Fruits","Three Kingdoms","Journey To The West","God Of Wealth","Highroad King","Caramelo Jackpot","Western Zombie","Forest Treasures","Book of Mystery Pyramids","Jack Potter in Vegas","God's Party","Chinese Express","Friday in Vegas","Crown of Afrodita","Caucasian Wolf","Snow Giants","Laplandia Train","Jungle Gold Megaways","Brazil Farm","Troyan Gems","Anubis Obelisk","Wild West Girls","Red Dragon Ways","Witch's Secret","Don Papu Sweet Halloween","Juicy Crush Halloween","Jack Potter Halloween","Lucky Punch Megaways","Liga Fortuna Megaways","Jack Potter Megaways","Hot and Spicy Megaways","Combo Seven","Happy Cookie","Christmas Seven","Inca Son","Iggy Racing","Chervona Kalyna","Royal Kitties","Crystal Cascade","Juicy Crush","Joker Coins","Joker Coins X-MAS","Jack Potter Deluxe","Jack Potter X-MAS","Jack Potter","Fruity Book","Hot and Spicy","Hot and Spicy Jackpot","Book of Eye","Lucky Punch","Book of Bamboo","Robin Hood Valentine","Irish Coins - Christmas","Rainbow Stacks","Reign Of Gnomes","Good Fishes","Parrots Of Caribbean","Lotto Lucky","Space Traders","Robin Hood and his Merry Wins","The Big Deal","Wishes","Squish","Dragon Coins","Irish Coins","Thor of Asgard","Neon Blaze","Pets Pay Day","Gumball7s","Deadly Outlaw","288","Zooo","Hawaii - Summer Dream","Peony Beauty - Sweet Dream","Shangliang Mountain","Cleopatra","Football Confrontation","Lu Bu"],
+  "PlayTech": ["Orianas Orbs","Big Bad Wolf Cash Collect and Link","Mahjong Magic","Gold Trio 10000","Wild Beans","Sticky Bandits Thunder Rail","Arowana's Luck","Ka Ching Boom","Beastwood","Fire Blaze Blue Wizard","Buffalo Blitz Cash Collect","Scepter of Anubis","Adventures Beyond Wonderland Magical Maze","Azticons Chaos Clusters","Betty Bonkers","Big Bad Wolf Pigs of Steel","Sakura Fortune Epic Bloom","Book of Duat","Brooklyn Bootleggers","Eastern Emeralds Megaways","Wild Harlequin","Diamond Rise","Fire Blaze Golden Macaque","Fire Blaze Green Wizard","Fire Blaze Red Wizard","Frog's Gift","Leprechaun's Luck Cash Collect","Sahara Riches Cash Collect","Lucky Bass Mega Cash Collect","Epic Fish Adventure","Circuit Shock","Shields of Lambda","Temple of Paw","Lights of Luck","Epic Fish Net of Fortune","Reel Nightmare","Blue Wizard Cash Collect & Link","Ocean Frenzy","Piggy Mania","Mega Fire Blaze Lucky Bass","Oink Oink Oink: Pharaohs","Lil Demon Double Heat","Leprechaun's Luck Cash Collect Megaways","Macabra Linx","Veils of Venice","Primal Spirits","Cash Truck Begins","Book of Inferno","Mine & Melt","Flip Royale","Golden Ways","Cash Reveal","Lil Demon Blazing Lava","Epic Fish Marlin Madness","Baa Baa Baa","Clover Flip","Gold Trio Santa Surprise","King of Olympus","Lil Greedy","Lion Mania","Mega Fire Blaze The Khan","Ready Steady Robo","Red Wizard Bank It Up","The Grim Reaper","9 Stars Ablaze","15 Stars Ablaze","Fire Blaze White Witch","King of Giza Mega Cash Collect & Link","Oink Oink Oink","Archer","Great Blue","Triple Meow Riches","Ultra Ace","Absolutely Mammoth","Anaconda Wild 2","Animal Instinct","Atlantis Cash Collect","Aztec Expedition Thundershots","Eye of Anubis","Fire Blaze Golden Amazing Factory","Fire Blaze Golden Buccaneer Bells","Fire Blaze Adventure Trail","Fire Blaze Blue Wizard Megaways","Fire Blaze Eternal Lady","Fire Blaze River Empress","Mega Fire Blaze Big Circus","Mega Fire Blaze Emperor of Rome","Mega Fire Blaze Legacy of the Tiger","Mega Fire Blaze Piggies and the Bank","Queen of the Pyramids Mega Cash Collect","Sahara Riches MegaWays Cash Collect","Silver Bullet Bandit Cash Collect","Ways of the Genie","Zodiac Charms","Dragon Bond","Free the Dragon","Gold Hit O'Reilly's Charms","Gold Hit Lucky Granny","Fat Choy Choy Sun","Fluffy Favourites Cash Collect","Piggies and the Bank Cash Collect & Link","Candy Roll","Elephant Riches","Fei Long Zai Tian","Feng Shui Flip","Gates of Camelot","Samurai Fury","Sinbad's Golden Voyage","Sweet N Juicy","Wolves Cash Collect & Link","Gold Pile New Year's Gold","Jinfu Long","Jinfu Xingyun","Koi Harmony","Kraken Spins","Lucky Gift Cash Collect","Mega Fire Blaze 3 Wizards","Silent Samurai Mega Cash Collect","The Great Genie","Mystic Mines","Toucan Mania","Scatter Monsters","Spinions Game Day","Blackbeard's Hoard Cash Sacks"]
+};
+
+let activeProvider = null;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function showSlotResult(provider) {
+  activeProvider = provider;
+  const games = shuffle(providers[provider]).slice(0, 5);
+
+  document.getElementById('resultTitle').innerHTML =
+    `🔥INFO ${provider.toUpperCase()} GACOR HARI INI🔥`;
+
+  const list = document.getElementById('gameList');
+  list.innerHTML = games.map(g =>
+    `<div class="game-item"><span class="icon">📢</span>${g}</div>`
+  ).join('');
+
+  const box = document.getElementById('resultBox');
+  box.style.display = 'block';
+  box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+  // AUTO COPY
+  const textToCopy =
+    `🔥INFO ${provider.toUpperCase()} GACOR HARI INI🔥\n\n` +
+    games.map((g, i) => `${i + 1}. ${g}`).join('\n');
+
+  navigator.clipboard.writeText(textToCopy).then(() => {
+    showToast('✅ Done Wak!', 'success');
+  }).catch(() => {
+    showToast('⚠️ Format slot berhasil dibuat.', 'warning');
+  });
+}
+
+// Build provider grid
+const grid = document.getElementById('providerGrid');
+Object.keys(providers).forEach(p => {
+  const btn = document.createElement('button');
+  btn.className = 'provider-btn';
+  btn.textContent = p;
+  btn.onclick = () => {
+    document.querySelectorAll('.provider-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    showSlotResult(p);
+  };
+  grid.appendChild(btn);
+});
+
+document.getElementById('regenBtn').onclick = () => {
+  if (activeProvider) showSlotResult(activeProvider);
+};
+
+/* =========================================================
+   TOGEL LOGIC
+========================================================= */
+const shioList = ['KUDA','ULAR','NAGA','KELINCI','HARIMAU','KERBAU','TIKUS','BABI','ANJING','AYAM','MONYET','KAMBING'];
+
+function getRandomNumber(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+function generateRandomNumbers(count, min, max) {
+  min = (min === undefined) ? 1 : min;
+  max = (max === undefined) ? 9 : max;
+  const n = [];
+  for (let i = 0; i < count; i++) n.push(getRandomNumber(min, max));
+  return n;
+}
+
+function generatePairs(count) {
+  const p = [];
+  for (let i = 0; i < count; i++) p.push('' + getRandomNumber(0,9) + getRandomNumber(0,9));
+  return p;
+}
+
+function getCurrentDate() {
+  const now = new Date();
+  return String(now.getDate()).padStart(2,'0') + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + now.getFullYear();
+}
+
+function getRandomShio() { return shioList[Math.floor(Math.random() * shioList.length)]; }
+
+function generateTogelPrediction(marketName) {
+  const tanggal = getCurrentDate();
+  const angkaMain = generateRandomNumbers(4).join(' ');
+  const bbfs = generateRandomNumbers(5).join(' ');
+  const shio = getRandomShio();
+  const colokAngka = generateRandomNumbers(2).join(' ');
+  const top2d = [];
+  for (let i = 0; i < 5; i++) top2d.push(generatePairs(5).join(' '));
+  const angkaPanas = generatePairs(3).join(' ');
+  return 'Prediksi Togel - ' + marketName + ' -\nTANGGAL  ' + tanggal + '\nANGKA MAIN : ' + angkaMain + '\nBBFS : ' + bbfs + '\nSHIO : ' + shio + '\nCOLOK ANGKA : ' + colokAngka + '\n \nTOP 2D :\n' + top2d[0] + ' \n' + top2d[1] + ' \n' + top2d[2] + ' \n' + top2d[3] + ' \n' + top2d[4] + '\n \nANGKA PANASNYA : ' + angkaPanas;
+}
+
+function generate(number, evt) {
+  const names = {1:'TOTO WUHAN',2:'HONGKONG SIANG',3:'SYDNEY POOLS',4:'TAIPING POOLS',5:'SINGAPORE POOLS',6:'MALAYSIA POOLS',7:'ETAWAH POOLS',8:'HONGKONG POOLS'};
+  const outputBox = document.getElementById('outputBox');
+  const button = evt.target.closest('.gen-button');
+  button.disabled = true;
+  const originalHTML = button.innerHTML;
+  button.innerHTML = '<span>Bentar.. <span class="loading"></span></span>';
+
+  setTimeout(function() {
+    try {
+      const result = generateTogelPrediction(names[number]);
+      outputBox.classList.add('animating');
+      outputBox.textContent = result;
+      outputBox.classList.remove('empty');
+      outputBox.classList.add('has-content');
+      setTimeout(function() { outputBox.classList.remove('animating'); }, 500);
+      navigator.clipboard.writeText(result).then(function() {
+        showToast('✅ ' + names[number] + ' - Done wak!', 'success');
+      }).catch(function() {
+        showToast('⚠️ ' + names[number] + ' - Prediksi berhasil!', 'warning');
+      });
+    } catch(err) {
+      outputBox.textContent = 'Error: ' + err.message;
+      showToast('❌ Terjadi kesalahan!', 'error');
+    }
+    button.disabled = false;
+    button.innerHTML = originalHTML;
+  }, 800);
+}
+
+function showToast(message, type) {
+  type = type || 'success';
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.style.background = type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#f59e0b';
+  toast.classList.add('show');
+  setTimeout(function() { toast.classList.remove('show'); }, 3000);
+}
+</script>
 </body>
-
 </html>
