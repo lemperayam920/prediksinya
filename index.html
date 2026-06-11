@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🤙 Buatan CS Ganteng Idaman</title>
-    <style><style>
+<style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
@@ -49,7 +49,7 @@ body {
 }
 
 .navbar-logo {
-  height: 25px;
+  height: 38px;
   width: auto;
   object-fit: contain;
   flex-shrink: 0;
@@ -95,22 +95,6 @@ body {
   color: #5fffcc;
   border-color: rgba(0,255,180,0.38);
   box-shadow: 0 0 14px rgba(0,255,180,0.15);
-}
-
-/* ===================== LOGO SECTION ===================== */
-.logo-section {
-  width: 100%;
-  padding: 28px 0 22px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.logo-section img {
-  max-height: 200px;
-  max-width: 70%;
-  object-fit: contain;
-  filter: drop-shadow(0 0 20px rgba(0,255,180,0.28)) drop-shadow(0 4px 18px rgba(0,0,0,0.5));
 }
 
 /* ===================== PAGES ===================== */
@@ -251,6 +235,72 @@ body {
 
 .divider { width: 60%; height: 1px; background: #ffd70033; margin: 14px auto; }
 
+/* ===================== JAM GACOR ===================== */
+.jam-block {
+  margin: 14px 0 8px;
+  background: linear-gradient(135deg, rgba(0,30,20,0.85), rgba(0,20,40,0.85));
+  border: 1.5px solid rgba(255,215,0,0.35);
+  border-radius: 14px;
+  padding: 14px 16px;
+  text-align: left;
+}
+.jam-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #ffd700;
+  text-shadow: 0 0 8px #ffd700aa;
+  text-align: center;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+.jam-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,215,0,0.1);
+}
+.jam-row:last-child { border-bottom: none; }
+.jam-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #a5ffd8;
+  min-width: 72px;
+}
+.jam-time {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 6px rgba(0,255,180,0.4);
+}
+
+/* ===================== POLA GACOR ===================== */
+.pola-block {
+  margin: 10px 0 8px;
+  background: linear-gradient(135deg, rgba(20,0,40,0.85), rgba(0,10,35,0.85));
+  border: 1.5px solid rgba(150,80,255,0.4);
+  border-radius: 14px;
+  padding: 14px 16px;
+  text-align: left;
+}
+.pola-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #c87aff;
+  text-shadow: 0 0 8px #c87affaa;
+  text-align: center;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+.pola-lines {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #e8e0ff;
+  line-height: 1.9;
+  letter-spacing: 0.3px;
+}
+
 /* ===================== TOGEL PAGE ===================== */
 .togel-page {
   padding: 0;
@@ -318,23 +368,19 @@ body {
 }
 
 .gen-button {
-  background: linear-gradient(145deg, rgba(0,80,200,0.7) 0%, rgba(0,50,140,0.7) 100%);
-  border: 1px solid rgba(0,150,255,0.35);
-  padding: 18px 20px;
-  border-radius: 14px;
-  color: white;
-  font-size: 16px;
-  font-weight: 700;
+    background: linear-gradient(145deg, rgba(10,30,20,0.85), rgba(0,50,35,0.85));
+  border: 1.5px solid rgba(0,200,130,0.35);
+  color: #c7ffd8;
+  padding: 10px 6px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-  box-shadow:
-    0 5px 0 rgba(0,30,90,0.9),
-    0 10px 20px rgba(0,30,90,0.4),
-    inset 0 1px 0 rgba(255,255,255,0.2);
-  text-align: left;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-align: center;
+  transition: all 0.18s;
+  line-height: 1.35;
+  letter-spacing: 0.3px;
+  backdrop-filter: blur(8px);
 }
 
 .gen-button::before {
@@ -532,10 +578,10 @@ body {
     </div>
   </nav>
 
-
-
   <!-- PAGE: SLOT GACOR -->
   <div class="page active slot-page" id="page-slot">
+    <h1>🎰 SLOT GACOR HARI INI</h1>
+    <p class="slot-subtitle">Pilih provider favoritmu dan temukan game gacor hari ini!</p>
     <div class="provider-grid" id="providerGrid"></div>
     <div class="result-box" id="resultBox">
       <div class="result-title" id="resultTitle"></div>
@@ -735,31 +781,150 @@ function shuffle(arr) {
   return a;
 }
 
+/* --- helpers --- */
+function rnd(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+function randTime(hMin, hMax) {
+  var h = rnd(hMin, hMax);
+  var m = rnd(0, 59);
+  return String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0');
+}
+
+/* generate two times within a range, sorted ascending, gap at least 30 min */
+function jamRange(hMin, hMax) {
+  var t1h = rnd(hMin, hMax - 1);
+  var t1m = rnd(0, 59);
+  var t2h = t1h + rnd(0, Math.min(1, hMax - t1h));
+  var t2m = rnd(0, 59);
+  if (t2h === t1h && t2m <= t1m) t2m = Math.min(59, t1m + rnd(10, 40));
+  /* wrap 24 → 00 */
+  var d1h = t1h === 24 ? 0 : t1h;
+  var d2h = t2h === 24 ? 0 : t2h;
+  return String(d1h).padStart(2,'0') + ':' + String(t1m).padStart(2,'0') +
+         ' - ' +
+         String(d2h).padStart(2,'0') + ':' + String(t2m).padStart(2,'0');
+}
+
+function generateJamGacor() {
+  return {
+    pagi:  jamRange(1,  10),
+    siang: jamRange(11, 14),
+    sore:  jamRange(15, 17),
+    malam: jamRange(18, 24)  /* 24 will be displayed as 00 */
+  };
+}
+
+function pickFrom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+function generatePolaPragmatic() {
+  var turboOpts = [10, 20, 30, 50];
+  var symbols = ['✅','❎'];
+  function row() { return [pickFrom(symbols), pickFrom(symbols), pickFrom(symbols)].join(''); }
+  var turbo1 = pickFrom(turboOpts);
+  var turbo2 = pickFrom(turboOpts);
+  var manual = rnd(1, 100);
+  return [row(), 'SPIN TURBO ' + turbo1 + 'x', '', row(), 'SPIN CEPAT ' + turbo2 + 'x', '', row(), 'SPIN MANUAL ' + manual + 'x'];
+}
+
+function generatePolaPGSoft() {
+  var autoOpts = [10, 30, 50, 80];
+  var onAuto  = pickFrom(autoOpts);
+  var offAuto = pickFrom(autoOpts);
+  var manual  = rnd(1, 100);
+  var icons = ['✅','❎'];
+  var i1 = pickFrom(icons), i2 = pickFrom(icons), i3 = pickFrom(icons);
+  return [i1 + 'SPIN TURBO ON', 'AUTO ' + onAuto + 'x', '', i2 + 'SPIN MANUAL', 'MANUAL ' + manual + 'x', '', i3 + 'SPIN TURBO OFF', 'AUTO ' + offAuto + 'x'];
+}
+
+function buildGameItemsHTML(games) {
+  return games.map(function(g) {
+    return '<div class="game-item"><span class="icon">📢</span>' + g + '</div>';
+  }).join('');
+}
+
+function buildJamGacorHTML(jam) {
+  return '<div class="jam-block">' +
+    '<div class="jam-title">🔥JAM GACOR🔥</div>' +
+    '<div class="jam-row"><span class="jam-label">🕕PAGI</span><span class="jam-time">' + jam.pagi  + '</span></div>' +
+    '<div class="jam-row"><span class="jam-label">🕕SIANG</span><span class="jam-time">' + jam.siang + '</span></div>' +
+    '<div class="jam-row"><span class="jam-label">🕕SORE</span><span class="jam-time">'  + jam.sore  + '</span></div>' +
+    '<div class="jam-row"><span class="jam-label">🕕MALAM</span><span class="jam-time">' + jam.malam + '</span></div>' +
+  '</div>';
+}
+
+function buildPolaHTML(polaArr) {
+  return '<div class="pola-block">' +
+    '<div class="pola-title">🔥POLA GACOR🔥</div>' +
+    '<div class="pola-lines">' + polaArr.join('<br>') + '</div>' +
+  '</div>';
+}
+
+/* copy-text builder — produces exact format as requested */
+function buildCopyText(provider, games, jam, pola) {
+  var lines = [];
+  lines.push('🔥INFO ' + provider.toUpperCase() + ' GACOR HARI INI🔥');
+  games.forEach(function(g){ lines.push('📢' + g); });
+  lines.push('');
+  lines.push('🔥JAM GACOR🔥');
+  lines.push('🕕PAGI ');
+  lines.push(jam.pagi);
+  lines.push('🕕SIANG ');
+  lines.push(jam.siang);
+  lines.push('🕕SORE ');
+  lines.push(jam.sore);
+  lines.push('🕕MALAM ');
+  lines.push(jam.malam);
+  if (pola) {
+    lines.push('');
+    lines.push('🔥POLA GACOR🔥');
+    pola.forEach(function(l){ lines.push(l); });
+  }
+  lines.push('');
+  lines.push('🔥KAMI NANTIKAN KABAR JACKPOT NYA BOSKU🔥');
+  return lines.join('\n');
+}
+
 function showSlotResult(provider) {
   activeProvider = provider;
-  const games = shuffle(providers[provider]).slice(0, 5);
+  var games = shuffle(providers[provider]).slice(0, 5);
+  var jam   = generateJamGacor();
+  var isPP  = (provider === 'Pragmatic Play');
+  var isPG  = (provider === 'PGSoft');
+  var pola  = isPP ? generatePolaPragmatic() : (isPG ? generatePolaPGSoft() : null);
 
   document.getElementById('resultTitle').innerHTML =
-    `🔥INFO ${provider.toUpperCase()} GACOR HARI INI🔥`;
+    '🔥INFO ' + provider.toUpperCase() + ' GACOR HARI INI🔥';
 
-  const list = document.getElementById('gameList');
-  list.innerHTML = games.map(g =>
-    `<div class="game-item"><span class="icon">📢</span>${g}</div>`
-  ).join('');
+  var list = document.getElementById('gameList');
+  var html = buildGameItemsHTML(games);
+  html += buildJamGacorHTML(jam);
+  if (pola) html += buildPolaHTML(pola);
+  list.innerHTML = html;
 
-  const box = document.getElementById('resultBox');
+  var box = document.getElementById('resultBox');
   box.style.display = 'block';
   box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-  // AUTO COPY
-  const textToCopy =
-    `🔥INFO ${provider.toUpperCase()} GACOR HARI INI🔥\n\n` +
-    games.map((g, i) => `${i + 1}. ${g}`).join('\n');
-
-  navigator.clipboard.writeText(textToCopy).then(() => {
+  /* auto copy */
+  var textToCopy = buildCopyText(provider, games, jam, pola);
+  navigator.clipboard.writeText(textToCopy).then(function() {
     showToast('✅ Done Wak!', 'success');
-  }).catch(() => {
-    showToast('⚠️ Format slot berhasil dibuat.', 'warning');
+  }).catch(function() {
+    /* fallback for browsers that block clipboard without user gesture */
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = textToCopy;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('✅ Tersalin ke clipboard!', 'success');
+    } catch(e) {
+      showToast('⚠️ Format berhasil dibuat.', 'warning');
+    }
   });
 }
 
